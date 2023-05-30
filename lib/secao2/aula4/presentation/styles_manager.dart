@@ -30,7 +30,7 @@ TextStyle getMediumStyle({double fontSize = FontSize.s12, required Color color})
 
 // semi-bold
 TextStyle getSemiBoldStyle({double fontSize = FontSize.s12, required Color color}){
-  return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.semiBold;
+  return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.semiBold);
 }
 
 // bold text
