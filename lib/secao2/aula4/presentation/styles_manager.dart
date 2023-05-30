@@ -14,7 +14,7 @@ TextStyle _getTextStyle(double fontSize, String fontFamily, Color color, FontWei
 }
 
 // regular style
-TextStyle getRegularStyle({double fontSize = FontSize.s12, required Color color}){
+dynamic getRegularStyle({double fontSize = FontSize.s12, required Color color}){
   return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.regular);
 }
 
