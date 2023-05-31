@@ -19,21 +19,21 @@ dynamic getRegularStyle({double fontSize = FontSize.s12, required Color color}){
 }
 
 // light text
-TextStyle getLightStyle({double fontSize = FontSize.s12, required Color color}){
+dynamic getLightStyle({double fontSize = FontSize.s12, required Color color}){
   return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.light);
 }
 
 // medium text
-TextStyle getMediumStyle({double fontSize = FontSize.s12, required Color color}){
+dynamic getMediumStyle({double fontSize = FontSize.s12, required Color color}){
   return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.medium);
 }
 
 // semi-bold
-TextStyle getSemiBoldStyle({double fontSize = FontSize.s12, required Color color}){
+dynamic getSemiBoldStyle({double fontSize = FontSize.s12, required Color color}){
   return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.semiBold);
 }
 
 // bold text
-TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}){
+dynamic getBoldStyle({double fontSize = FontSize.s12, required Color color}){
   return _getTextStyle(fontSize, FontConstants.fontFamily, color, FontWeightManager.bold);
 }
