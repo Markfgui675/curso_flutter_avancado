@@ -2,6 +2,7 @@ import 'package:curso_flutter_avancado/secao2/aula4/presentation/forgot_pasword/
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/login/login.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/main/main_view.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/onboarding/onboarding.dart';
+import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/strings_manager.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/splash/splash.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/store/store_details.dart';
 import 'package:flutter/material.dart';
@@ -48,22 +49,22 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_) => StoreDetailsView());
 
       default:
-        return UnDefinedRoute();
+        return unDefinedRoute();
 
     }
 
   }
 
-  static Route<dynamic> UnDefinedRoute(){
+  static Route<dynamic> unDefinedRoute(){
     return MaterialPageRoute(builder: (_){
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text('No Route Found'),
+          title: const Text(AppStrings.noRouteFound),
           centerTitle: true,
         ),
         body: const Center(
-          child: Text('No Route Found'),
+          child: Text(AppStrings.noRouteFound),
         ),
       );
 
