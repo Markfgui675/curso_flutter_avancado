@@ -30,32 +30,62 @@ ThemeData getApplicationTheme(){
       color: ColorManager.primary,
       elevation: AppSize.s4,
       shadowColor: ColorManager.primaryOpacity,
-      titleTextStyle: getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16)
+      titleTextStyle: const TextStyle(
+          fontSize: 16,
+          fontFamily: 'Montserrat',
+          color: Colors.white,
+          fontWeight: FontWeight.w400
+      )
     ),
 
     // button theme
     buttonTheme: ButtonThemeData(
-      shape: StadiumBorder(),
+      shape: const StadiumBorder(),
       disabledColor: ColorManager.grey1,
       buttonColor:  ColorManager.primary,
       splashColor: ColorManager.primaryOpacity
     ),
-    
+
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: getRegularStyle(color: ColorManager.white),
-        primary: ColorManager.primary,
+        textStyle: const TextStyle(
+            fontSize: 16,
+            fontFamily: 'Montserrat',
+            color: Colors.white,
+            fontWeight: FontWeight.w400
+        ),
+        backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s12))
       )
     ),
 
     // text theme
-    textTheme: TextTheme(
-      headline1: getSemiBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s16),
-      subtitle1: getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
-      caption: getRegularStyle(color: ColorManager.grey1),
-      bodyText1: getRegularStyle(color: ColorManager.grey)
+    textTheme: const TextTheme(
+      headline1: TextStyle(
+          fontSize: 16,
+          fontFamily: 'Montserrat',
+          color: Color(0xff525252),
+          fontWeight: FontWeight.w400
+      ),
+      subtitle1: TextStyle(
+          fontSize: 14,
+          fontFamily: 'Montserrat',
+          color: Color(0xff9e9e9e),
+          fontWeight: FontWeight.w500
+      ),
+      caption: TextStyle(
+          fontSize: 14,
+          fontFamily: 'Montserrat',
+          color: Color(0xff707070),
+          fontWeight: FontWeight.w400
+      ),
+      bodyText1: TextStyle(
+          fontSize: 14,
+          fontFamily: 'Montserrat',
+          color: Color(0xff737477),
+          fontWeight: FontWeight.w400
+      )
     ),
 
     // input decoration theme (text form field)
@@ -63,13 +93,28 @@ ThemeData getApplicationTheme(){
       contentPadding: const EdgeInsets.all(AppPadding.p8),
 
       // hint style
-      hintStyle: getRegularStyle(color: ColorManager.grey1),
+      hintStyle: const TextStyle(
+          fontSize: 12,
+          fontFamily: 'Montserrat',
+          color: Color(0xff737477),
+          fontWeight: FontWeight.w400
+      ),
 
       // label style
-      labelStyle:  getMediumStyle(color: ColorManager.darkGrey),
+      labelStyle:  const TextStyle(
+          fontSize: 12,
+          fontFamily: 'Montserrat',
+          color: Color(0xff525252),
+          fontWeight: FontWeight.w500
+      ),
 
       //error style
-      errorStyle: getRegularStyle(color: ColorManager.error),
+      errorStyle: const TextStyle(
+          fontSize: 12,
+          fontFamily: 'Montserrat',
+          color: Color(0xffe61f34),
+          fontWeight: FontWeight.w400
+      ),
 
       // enabled border
       enabledBorder: OutlineInputBorder(
