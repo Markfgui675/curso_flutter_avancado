@@ -1,9 +1,11 @@
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/assets_manager.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/color_manager.dart';
+import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/styles_manager.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../resources/font_manager.dart';
 import '../resources/strings_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -65,16 +67,82 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               alignment: Alignment.centerRight,
               child: InkWell(
                 onTap: (){},
-                child: Text(AppStrings.skip, textAlign: TextAlign.end,),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                  child: Text(AppStrings.skip, textAlign: TextAlign.end,
+                    style: getMediumStyle(fontSize: FontSize.s16,color: ColorManager.primary),),
+                ),
               ),
             ),
+            _getBottomSheetWidget()
           ],
         ),
       ),
 
     );
   }
+
+  Widget _getBottomSheetWidget(){
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: InkWell(
+            onTap: (){
+
+            },
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: Icon(Icons.arrow_back),
+            ),
+          ),
+        ),
+
+        // circles indicators
+        Row(
+          children: [
+            for(int i = 0; i < _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              )
+          ],
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: InkWell(
+            onTap: (){
+
+            },
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: Icon(Icons.arrow_forward),
+            ),
+          ),
+        )
+
+      ],
+    );
+
+  }
+
+  Widget _getProperCircle(int index){
+    if(index == _currentIndex){
+      return Image.asset(ImageAssets.notMarked, width: AppSize.s32,);
+    } else {
+      return Image.asset(ImageAssets.marked, width: AppSize.s32,);
+    }
+  }
+
 }
+
+
 
 class OnBoardingPage extends StatelessWidget {
   SliderObject _sliderObject;
@@ -99,7 +167,7 @@ class OnBoardingPage extends StatelessWidget {
 
         // image widget
         Container(
-          height: 430,
+          height: AppSize.s430,
           width: MediaQuery.of(context).size.width*0.85,
           decoration: BoxDecoration(
             image: DecorationImage(

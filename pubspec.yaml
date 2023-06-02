@@ -30,6 +30,8 @@ flutter:
     - assets/image/onboarding2.jpg
     - assets/image/onboarding3.jpg
     - assets/image/onboarding4.jpg
+    - assets/image/new-moon.png
+    - assets/image/rec.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

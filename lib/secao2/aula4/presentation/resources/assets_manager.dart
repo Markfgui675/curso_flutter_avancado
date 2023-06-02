@@ -8,6 +8,7 @@ class ImageAssets{
   static const String onBoardingLogo2 = "$IMAGE_PATH/onboarding2.jpg";
   static const String onBoardingLogo3 = "$IMAGE_PATH/onboarding3.jpg";
   static const String onBoardingLogo4 = "$IMAGE_PATH/onboarding4.jpg";
-
+  static const String notMarked = "$IMAGE_PATH/new-moon.png";
+  static const String marked = "$IMAGE_PATH/rec.png";
 
 }
