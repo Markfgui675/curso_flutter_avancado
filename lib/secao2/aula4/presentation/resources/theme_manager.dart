@@ -15,8 +15,6 @@ ThemeData getApplicationTheme(){
     // ripple color
     splashColor: ColorManager.primaryOpacity,
 
-    accentColor: ColorManager.grey,
-
     //card view theme
     cardTheme:  CardTheme(
       color: ColorManager.white,
@@ -30,12 +28,7 @@ ThemeData getApplicationTheme(){
       color: ColorManager.primary,
       elevation: AppSize.s4,
       shadowColor: ColorManager.primaryOpacity,
-      titleTextStyle: const TextStyle(
-          fontSize: 16,
-          fontFamily: 'Montserrat',
-          color: Colors.white,
-          fontWeight: FontWeight.w400
-      )
+      titleTextStyle: getRegularStyle(color: ColorManager.white, fontSize: AppSize.s16)
     ),
 
     // button theme
@@ -49,43 +42,18 @@ ThemeData getApplicationTheme(){
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        textStyle: const TextStyle(
-            fontSize: 16,
-            fontFamily: 'Montserrat',
-            color: Colors.white,
-            fontWeight: FontWeight.w400
-        ),
+        textStyle: getRegularStyle(color: ColorManager.white),
         backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSize.s12))
       )
     ),
 
     // text theme
-    textTheme: const TextTheme(
-      headline1: TextStyle(
-          fontSize: 16,
-          fontFamily: 'Montserrat',
-          color: Color(0xff525252),
-          fontWeight: FontWeight.w400
-      ),
-      subtitle1: TextStyle(
-          fontSize: 14,
-          fontFamily: 'Montserrat',
-          color: Color(0xff9e9e9e),
-          fontWeight: FontWeight.w500
-      ),
-      caption: TextStyle(
-          fontSize: 14,
-          fontFamily: 'Montserrat',
-          color: Color(0xff707070),
-          fontWeight: FontWeight.w400
-      ),
-      bodyText1: TextStyle(
-          fontSize: 14,
-          fontFamily: 'Montserrat',
-          color: Color(0xff737477),
-          fontWeight: FontWeight.w400
-      )
+    textTheme: TextTheme(
+      headline1: getSemiBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s12),
+      subtitle1: getMediumStyle(color: ColorManager.lightGrey, fontSize: FontSize.s14),
+      caption: getRegularStyle(color: ColorManager.grey1),
+      bodyText1: getRegularStyle(color: ColorManager.grey)
     ),
 
     // input decoration theme (text form field)
@@ -93,28 +61,13 @@ ThemeData getApplicationTheme(){
       contentPadding: const EdgeInsets.all(AppPadding.p8),
 
       // hint style
-      hintStyle: const TextStyle(
-          fontSize: 12,
-          fontFamily: 'Montserrat',
-          color: Color(0xff737477),
-          fontWeight: FontWeight.w400
-      ),
+      hintStyle: getRegularStyle(color: ColorManager.grey1),
 
       // label style
-      labelStyle:  const TextStyle(
-          fontSize: 12,
-          fontFamily: 'Montserrat',
-          color: Color(0xff525252),
-          fontWeight: FontWeight.w500
-      ),
+      labelStyle:  getMediumStyle(color: ColorManager.darkGrey),
 
       //error style
-      errorStyle: const TextStyle(
-          fontSize: 12,
-          fontFamily: 'Montserrat',
-          color: Color(0xffe61f34),
-          fontWeight: FontWeight.w400
-      ),
+      errorStyle: getRegularStyle(color: ColorManager.error),
 
       // enabled border
       enabledBorder: OutlineInputBorder(
@@ -138,7 +91,7 @@ ThemeData getApplicationTheme(){
       focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
           borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8))
-      )
+      ),
     )
 
   );
