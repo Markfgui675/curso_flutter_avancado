@@ -33,6 +33,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
+        backgroundColor: ColorManager.white,
         elevation: AppSize.s1_5,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
@@ -50,9 +51,25 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         },
         itemBuilder: (_, index){
 
-          return Container();
+          var item = _list[index];
+          return OnBoardingPage(item);
 
         },
+      ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: (){},
+                child: Text(AppStrings.skip, textAlign: TextAlign.end,),
+              ),
+            ),
+          ],
+        ),
       ),
 
     );
@@ -78,7 +95,19 @@ class OnBoardingPage extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.p8),
           child: Text(_sliderObject.subTitle!, textAlign: TextAlign.center, style: Theme.of(context).textTheme.subtitle1,),
         ),
-        const SizedBox(height: AppSize.s60,)
+        const SizedBox(height: AppSize.s60,),
+
+        // image widget
+        Container(
+          height: 430,
+          width: MediaQuery.of(context).size.width*0.85,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(_sliderObject.image!),
+              fit: BoxFit.cover
+            )
+          ),
+        )
 
       ],
     );

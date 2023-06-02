@@ -26,10 +26,10 @@ flutter:
 
   assets:
     - assets/image/soundcloud.png
-    - assets/image/onboarding_screen1.jpg
-    - assets/image/onboarding_screen2.jpg
-    - assets/image/onboarding_screen3.jpg
-    - assets/image/onboarding_screen4.jpg
+    - assets/image/onboarding1.jpg
+    - assets/image/onboarding2.jpg
+    - assets/image/onboarding3.jpg
+    - assets/image/onboarding4.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
