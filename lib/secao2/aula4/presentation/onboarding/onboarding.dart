@@ -63,14 +63,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         height: AppSize.s100,
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: (){},
-                child: Padding(
-                  padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
-                  child: Text(AppStrings.skip, textAlign: TextAlign.end,
-                    style: getMediumStyle(fontSize: FontSize.s16,color: ColorManager.primary),),
+            SizedBox(
+              height: AppSize.s30,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: (){},
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                    child: Text(AppStrings.skip, textAlign: TextAlign.end,
+                      style: getMediumStyle(fontSize: FontSize.s16,color: ColorManager.primary),),
+                  ),
                 ),
               ),
             ),
@@ -84,59 +87,64 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Widget _getBottomSheetWidget(){
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+    return Container(
+      height: AppSize.s70,
+      width: double.infinity,
+      color: ColorManager.primary,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
 
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: InkWell(
-            onTap: (){
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: InkWell(
+              onTap: (){
 
-            },
-            child: SizedBox(
-              height: AppSize.s20,
-              width: AppSize.s20,
-              child: Icon(Icons.arrow_back),
+              },
+              child: SizedBox(
+                height: AppSize.s20,
+                width: AppSize.s20,
+                child: Icon(Icons.arrow_back, color: ColorManager.white,),
+              ),
             ),
           ),
-        ),
 
-        // circles indicators
-        Row(
-          children: [
-            for(int i = 0; i < _list.length; i++)
-              Padding(
-                padding: const EdgeInsets.all(AppPadding.p8),
-                child: _getProperCircle(i),
-              )
-          ],
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: InkWell(
-            onTap: (){
-
-            },
-            child: SizedBox(
-              height: AppSize.s20,
-              width: AppSize.s20,
-              child: Icon(Icons.arrow_forward),
-            ),
+          // circles indicators
+          Row(
+            children: [
+              for(int i = 0; i < _list.length; i++)
+                Padding(
+                  padding: const EdgeInsets.all(AppPadding.p8),
+                  child: _getProperCircle(i),
+                )
+            ],
           ),
-        )
 
-      ],
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: InkWell(
+              onTap: (){
+
+              },
+              child: SizedBox(
+                height: AppSize.s20,
+                width: AppSize.s20,
+                child: Icon(Icons.arrow_forward, color: ColorManager.white,),
+              ),
+            ),
+          )
+
+        ],
+      ),
     );
 
   }
 
   Widget _getProperCircle(int index){
     if(index == _currentIndex){
-      return Image.asset(ImageAssets.notMarked, width: AppSize.s32,);
+      return Image.asset(ImageAssets.marked, width: AppSize.s16,);
     } else {
-      return Image.asset(ImageAssets.marked, width: AppSize.s32,);
+      return Image.asset(ImageAssets.notMarked, width: AppSize.s16,);
     }
   }
 
