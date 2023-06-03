@@ -1,11 +1,10 @@
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/assets_manager.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/color_manager.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/styles_manager.dart';
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../resources/font_manager.dart';
+import '../../domain/model.dart';
 import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 
@@ -225,17 +224,3 @@ class OnBoardingPage extends StatelessWidget {
     );
   }
 }
-
-
-class SliderObject{
-
-  String? title;
-  String? subTitle;
-  String? image;
-
-  SliderObject(
-      this.title, this.subTitle, this.image);
-
-
-}
-

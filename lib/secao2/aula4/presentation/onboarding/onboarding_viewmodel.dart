@@ -1,7 +1,13 @@
+import 'dart:async';
+
 import 'package:curso_flutter_avancado/secao2/aula4/presentation/base/baseviewmodel.dart';
+
+import '../../domain/model.dart';
+
 
 class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, OnBoardingViewModelOutput{
   // stream controllers
+  final StreamController _streamController = StreamController<SlideViewObject>();
 
 
   //inputs
@@ -30,6 +36,14 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, O
     // TODO: implement onPageChanged
   }
 
+  @override
+  // TODO: implement inputSliderViewObject
+  Sink get inputSliderViewObject => throw UnimplementedError();
+
+  @override
+  // TODO: implement outputSliderViewObject
+  Stream<SlideViewObject> get outputSliderViewObject => throw UnimplementedError();
+
 }
 
 
@@ -40,12 +54,23 @@ abstract class OnBoardingViewModelInput{
   void goPrevious(); // when user clicks on left arrow
   void onPageChanged(int index);
 
+  Sink get inputSliderViewObject; // this is the way to add data to the stream... stream input
+
 }
 
 // outputs mean data or results that will be sent from our view model to our view
 abstract class OnBoardingViewModelOutput{
 
-  // will be implement it later
+  Stream<SlideViewObject> get outputSliderViewObject;
 
+}
+
+class SlideViewObject{
+
+  SliderObject? sliderObject;
+  int? numOfSlides;
+  int? currentIndex;
+
+  SlideViewObject(this.sliderObject, this.numOfSlides, this.currentIndex);
 }
 
