@@ -1,5 +1,5 @@
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/styles_manager.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/values_manager.dart';
+import 'package:curso_flutter_avancado/presentation/resources/styles_manager.dart';
+import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'color_manager.dart';
 import 'font_manager.dart';

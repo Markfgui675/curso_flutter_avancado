@@ -1,10 +1,10 @@
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/forgot_pasword/forgot_password.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/login/login.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/main/main_view.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/onboarding/onboarding.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/resources/strings_manager.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/splash/splash.dart';
-import 'package:curso_flutter_avancado/secao2/aula4/presentation/store/store_details.dart';
+import 'package:curso_flutter_avancado/presentation/forgot_pasword/forgot_password.dart';
+import 'package:curso_flutter_avancado/presentation/login/login.dart';
+import 'package:curso_flutter_avancado/presentation/main/main_view.dart';
+import 'package:curso_flutter_avancado/presentation/onboarding/onboarding.dart';
+import 'package:curso_flutter_avancado/presentation/resources/strings_manager.dart';
+import 'package:curso_flutter_avancado/presentation/splash/splash.dart';
+import 'package:curso_flutter_avancado/presentation/store/store_details.dart';
 import 'package:flutter/material.dart';
 
 import '../register/register.dart';
