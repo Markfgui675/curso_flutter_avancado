@@ -45,6 +45,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
       body: PageView.builder(
         controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: _list.length,
         onPageChanged: (index){
           setState(() {
@@ -64,7 +65,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         child: Column(
           children: [
             SizedBox(
-              height: AppSize.s30,
+              height: AppSize.s40,
               child: Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
@@ -88,7 +89,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   Widget _getBottomSheetWidget(){
 
     return Container(
-      height: AppSize.s70,
+      height: AppSize.s60,
       width: double.infinity,
       color: ColorManager.primary,
       child: Row(
@@ -96,10 +97,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         children: [
 
           Padding(
-            padding: const EdgeInsets.all(AppPadding.p14),
+            padding: const EdgeInsets.only(left: AppPadding.p20),
             child: InkWell(
               onTap: (){
-
+                _pageController.animateToPage(
+                    _getPreviousIndex(),
+                    duration: const Duration(milliseconds: DurationConst.d300),
+                    curve: Curves.linear
+                );
               },
               child: SizedBox(
                 height: AppSize.s20,
@@ -121,10 +126,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(AppPadding.p14),
+            padding: const EdgeInsets.only(right: AppPadding.p20),
             child: InkWell(
               onTap: (){
-
+                _pageController.animateToPage(
+                    _getNextIndex(),
+                    duration: const Duration(milliseconds: DurationConst.d300),
+                    curve: Curves.linear
+                );
               },
               child: SizedBox(
                 height: AppSize.s20,
@@ -137,6 +146,28 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ],
       ),
     );
+
+  }
+
+  int _getPreviousIndex(){
+
+    int previousIndex = _currentIndex--; // -1
+    if(previousIndex== -1){
+      _currentIndex = _list.length - 1; //infinite loop to go to the lenght of slider list
+    }
+
+    return _currentIndex;
+
+  }
+
+  int _getNextIndex(){
+
+    int nextIndex = _currentIndex++; // -1
+    if(nextIndex >= _list.length){
+      _currentIndex = 0; //infinite loop to go to the lenght of slider list
+    }
+
+    return _currentIndex;
 
   }
 

@@ -42,4 +42,10 @@ class AppSize{
 
 }
 
+class DurationConst{
+
+  static const int d300 = 300;
+
+}
+
 
