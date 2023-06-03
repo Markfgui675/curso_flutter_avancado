@@ -86,9 +86,7 @@ abstract class OnBoardingViewModelInput{
 
 // outputs mean data or results that will be sent from our view model to our view
 abstract class OnBoardingViewModelOutput{
-
   Stream<SlideViewObject> get outputSliderViewObject;
-
 }
 
 class SlideViewObject{

@@ -1,3 +1,4 @@
+import 'package:curso_flutter_avancado/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/assets_manager.dart';
 import 'package:curso_flutter_avancado/presentation/resources/color_manager.dart';
 import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
@@ -19,17 +20,33 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   PageController _pageController = PageController(initialPage: 0);
 
+  OnBoardingViewModel _viewModel = OnBoardingViewModel();
+
+  _bind(){
+    _viewModel.start();
+  }
+
+  @override
+  void initState() {
+    _bind();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return _getContentWidget();
+  }
+
+  Widget _getContentWidget(){
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
         backgroundColor: ColorManager.white,
         elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: ColorManager.white,
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.dark
+            statusBarColor: ColorManager.white,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.dark
         ),
       ),
       body: PageView.builder(
@@ -150,7 +167,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   @override
   void dispose() {
-
+    _viewModel.dispose();
     super.dispose();
   }
 
