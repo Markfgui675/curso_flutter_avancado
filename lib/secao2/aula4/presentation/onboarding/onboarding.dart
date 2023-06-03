@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../resources/font_manager.dart';
+import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -36,7 +37,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       backgroundColor: ColorManager.white,
       appBar: AppBar(
         backgroundColor: ColorManager.white,
-        elevation: AppSize.s1_5,
+        elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
           statusBarBrightness: Brightness.dark,
@@ -69,11 +70,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
                     child: Text(AppStrings.skip, textAlign: TextAlign.end,
-                      style: getMediumStyle(fontSize: FontSize.s16,color: ColorManager.primary),),
+                      style: Theme.of(context).textTheme.subtitle2,),
                   ),
                 ),
               ),
@@ -173,9 +176,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Widget _getProperCircle(int index){
     if(index == _currentIndex){
-      return Image.asset(ImageAssets.marked, width: AppSize.s16,);
+      return Image.asset(ImageAssets.marked, width: AppSize.s10,);
     } else {
-      return Image.asset(ImageAssets.notMarked, width: AppSize.s16,);
+      return Image.asset(ImageAssets.notMarked, width: AppSize.s10,);
     }
   }
 
@@ -196,11 +199,13 @@ class OnBoardingPage extends StatelessWidget {
         const SizedBox(height: AppSize.s40,),
         Padding(
           padding: const EdgeInsets.all(AppPadding.p8),
-          child: Text(_sliderObject.title!, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline1,),
+          child: Text(_sliderObject.title!, textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline1,),
         ),
         Padding(
           padding: const EdgeInsets.all(AppPadding.p8),
-          child: Text(_sliderObject.subTitle!, textAlign: TextAlign.center, style: Theme.of(context).textTheme.subtitle1,),
+          child: Text(_sliderObject.subTitle!, textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.subtitle2,),
         ),
         const SizedBox(height: AppSize.s60,),
 
