@@ -9,7 +9,7 @@ import '../resources/strings_manager.dart';
 
 class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, OnBoardingViewModelOutput{
   // stream controllers
-  final StreamController _streamController = StreamController<SlideViewObject>();
+  final StreamController _streamController = StreamController<SliderViewObject>();
 
   late final List<SliderObject> _list;
   int _currentIndex = 0;
@@ -28,21 +28,23 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, O
   }
 
   @override
-  void goNext() {
+  int goNext() {
     int nextIndex = _currentIndex++; // -1
     if(nextIndex >= _list.length){
       _currentIndex = 0; //infinite loop to go to the lenght of slider list
     }
     _postDataToView();
+    return _currentIndex;
   }
 
   @override
-  void goPrevious() {
+  int goPrevious() {
     int previousIndex = _currentIndex--; // -1
     if(previousIndex== -1){
       _currentIndex = _list.length - 1; //infinite loop to go to the lenght of slider list
     }
     _postDataToView();
+    return _currentIndex;
   }
 
   @override
@@ -55,7 +57,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, O
   Sink get inputSliderViewObject => _streamController.sink;
 
   @override
-  Stream<SlideViewObject> get outputSliderViewObject =>
+  Stream<SliderViewObject> get outputSliderViewObject =>
       _streamController.stream.map((slideViewObject) => slideViewObject);
 
   // private function
@@ -67,7 +69,7 @@ class OnBoardingViewModel extends BaseViewModel with OnBoardingViewModelInput, O
   ];
 
   _postDataToView(){
-    inputSliderViewObject.add(SlideViewObject(_list[_currentIndex], _list.length, _currentIndex));
+    inputSliderViewObject.add(SliderViewObject(_list[_currentIndex], _list.length, _currentIndex));
   }
 
 }
@@ -86,15 +88,15 @@ abstract class OnBoardingViewModelInput{
 
 // outputs mean data or results that will be sent from our view model to our view
 abstract class OnBoardingViewModelOutput{
-  Stream<SlideViewObject> get outputSliderViewObject;
+  Stream<SliderViewObject> get outputSliderViewObject;
 }
 
-class SlideViewObject{
+class SliderViewObject{
 
   SliderObject? sliderObject;
   int? numOfSlides;
   int? currentIndex;
 
-  SlideViewObject(this.sliderObject, this.numOfSlides, this.currentIndex);
+  SliderViewObject(this.sliderObject, this.numOfSlides, this.currentIndex);
 }
 

@@ -34,67 +34,75 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return _getContentWidget();
-  }
-
-  Widget _getContentWidget(){
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      appBar: AppBar(
-        backgroundColor: ColorManager.white,
-        elevation: AppSize.s0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ColorManager.white,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark
-        ),
-      ),
-      body: PageView.builder(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _list.length,
-        onPageChanged: (index){
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        itemBuilder: (_, index){
-
-          var item = _list[index];
-          return OnBoardingPage(item);
-
-        },
-      ),
-      bottomSheet: Container(
-        color: ColorManager.white,
-        height: AppSize.s100,
-        child: Column(
-          children: [
-            SizedBox(
-              height: AppSize.s40,
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: (){
-                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
-                    child: Text(AppStrings.skip, textAlign: TextAlign.end,
-                      style: Theme.of(context).textTheme.subtitle2,),
-                  ),
-                ),
-              ),
-            ),
-            _getBottomSheetWidget()
-          ],
-        ),
-      ),
-
+    return StreamBuilder<SliderViewObject>(
+      stream: _viewModel.outputSliderViewObject,
+      builder: (_, snapShot){
+        return _getContentWidget(snapShot.data!);
+      }
     );
   }
 
-  Widget _getBottomSheetWidget(){
+  Widget _getContentWidget(SliderViewObject data){
+
+    if(data == null){
+      return Container();
+    } else {
+      return Scaffold(
+        backgroundColor: ColorManager.white,
+        appBar: AppBar(
+          backgroundColor: ColorManager.white,
+          elevation: AppSize.s0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: ColorManager.white,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.dark
+          ),
+        ),
+        body: PageView.builder(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: data.numOfSlides,
+          onPageChanged: (index){
+            _viewModel.onPageChanged(index);
+          },
+          itemBuilder: (_, index){
+
+            var item = data.sliderObject;
+            return OnBoardingPage(item!);
+
+          },
+        ),
+        bottomSheet: Container(
+          color: ColorManager.white,
+          height: AppSize.s100,
+          child: Column(
+            children: [
+              SizedBox(
+                height: AppSize.s40,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                      child: Text(AppStrings.skip, textAlign: TextAlign.end,
+                        style: Theme.of(context).textTheme.subtitle2,),
+                    ),
+                  ),
+                ),
+              ),
+              _getBottomSheetWidget(data)
+            ],
+          ),
+        ),
+
+      );
+    }
+  }
+
+  Widget _getBottomSheetWidget(SliderViewObject data){
 
     return Container(
       height: AppSize.s60,
@@ -109,7 +117,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             child: InkWell(
               onTap: (){
                 _pageController.animateToPage(
-                    _getPreviousIndex(),
+                    _viewModel.goPrevious(),
                     duration: const Duration(milliseconds: DurationConst.d300),
                     curve: Curves.linear
                 );
@@ -125,10 +133,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           // circles indicators
           Row(
             children: [
-              for(int i = 0; i < _list.length; i++)
+              for(int i = 0; i < data.numOfSlides!; i++)
                 Padding(
                   padding: const EdgeInsets.all(AppPadding.p8),
-                  child: _getProperCircle(i),
+                  child: _getProperCircle(i, data),
                 )
             ],
           ),
@@ -138,7 +146,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             child: InkWell(
               onTap: (){
                 _pageController.animateToPage(
-                    _getNextIndex(),
+                    _viewModel.goNext(),
                     duration: const Duration(milliseconds: DurationConst.d300),
                     curve: Curves.linear
                 );
@@ -157,8 +165,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   }
 
-  Widget _getProperCircle(int index){
-    if(index == _currentIndex){
+  Widget _getProperCircle(int index, SliderViewObject data){
+    if(index == data.currentIndex){
       return Image.asset(ImageAssets.marked, width: AppSize.s10,);
     } else {
       return Image.asset(ImageAssets.notMarked, width: AppSize.s10,);
