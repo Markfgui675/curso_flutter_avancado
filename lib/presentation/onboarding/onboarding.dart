@@ -18,11 +18,12 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
 
-  final PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(
+      initialPage: 0);
 
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
-  _bind(){
+  _bind() {
     _viewModel.start();
   }
 
@@ -35,10 +36,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<SliderViewObject>(
-      stream: _viewModel.outputSliderViewObject,
-      builder: (_, snapShot){
-        return _getContentWidget(snapShot.data!);
-      }
+        stream: _viewModel.outputSliderViewObject,
+        builder: (_, snapShot) {
+          return _getContentWidget(
+              snapShot.data!);
+        }
     );
   }
 
@@ -185,7 +187,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
 class OnBoardingPage extends StatelessWidget {
   SliderObject _sliderObject;
-  OnBoardingPage(this._sliderObject, {super.key});
+  OnBoardingPage(this._sliderObject);
 
   @override
   Widget build(BuildContext context) {
