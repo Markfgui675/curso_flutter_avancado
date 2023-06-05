@@ -12,12 +12,18 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  retrofit: ^2.0.1
+  analyzer: ^2.6.0
+  dio: ^4.0.0
+  json_serializable: ^6.0.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  retrofit_generator: ^2.0.1+2
+  build_runner: ^2.0.0
 
-  flutter_lints: ^2.0.0
 
 
 flutter:
