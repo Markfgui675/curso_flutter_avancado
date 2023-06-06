@@ -57,7 +57,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: ColorManager.white,
               statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
+              statusBarIconBrightness: Brightness.dark,
           ),
         ),
         body: PageView.builder(
