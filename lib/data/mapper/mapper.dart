@@ -4,7 +4,6 @@ import '../../domain/model.dart';
 import '../responses/responses.dart';
 
 // to convert the response into a non nullable object
-
 const EMPTY = '';
 const ZERO = 0;
 
