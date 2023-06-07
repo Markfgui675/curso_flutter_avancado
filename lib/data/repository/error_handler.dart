@@ -1,3 +1,6 @@
+import 'package:curso_flutter_avancado/data/network/failure.dart';
+import 'package:dartz/dartz.dart';
+
 enum DataSource{
   SUCCESS,
   NO_CONTENT,
@@ -52,4 +55,49 @@ class ResponseMessage{
   static const String SEND_TIMEOUT = "Time out error, try again later";
   static const String CHACHE_ERROR =  "Cache error, try again later";
   static const String NI_INTERNNET_CONNECTION = "Please check your internet connection";
+}
+
+extension DataSourceExtension on DataSource{
+  Failure getFailure(){
+    switch(this){
+      case DataSource.BAD_REQUEST:
+        return Failure(ResponseCode.BAD_REQUEST, ResponseMessage.BAD_REQUEST);
+      case DataSource.FORBIDDEN:
+        return Failure(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN);
+      case DataSource.UNAUTHORISED:
+        return Failure(ResponseCode.UNAUTHORISED, ResponseMessage.UNAUTHORISED);
+
+      case DataSource.NOT_FOUND:
+        return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
+
+      case DataSource.INTERNAL_SERVER_ERROR:
+        return Failure(ResponseCode.INTERNAL_SERVER_ERROR, ResponseMessage.INTERNAL_SERVER_ERROR);
+
+      case DataSource.CONNECT_TIMEOUT:
+        return Failure(ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
+
+      case DataSource.CONNECT_TIMEOUT:
+        return Failure(ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
+
+      case DataSource.CANCEL:
+        return Failure(ResponseCode.CANCEL, ResponseMessage.CANCEL);
+
+      case DataSource.RECEIVE_TIMEOUT:
+        return Failure(ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
+
+      case DataSource.SEND_TIMEOUT:
+        return Failure(ResponseCode.SEND_TIMEOUT, ResponseMessage.SEND_TIMEOUT);
+
+      case DataSource.CHACHE_ERROR:
+        return Failure(ResponseCode.CHACHE_ERROR, ResponseMessage.CHACHE_ERROR);
+
+      case DataSource.NI_INTERNNET_CONNECTION:
+        return Failure(ResponseCode.NI_INTERNNET_CONNECTION, ResponseMessage.NI_INTERNNET_CONNECTION);
+
+      default:
+        return Failure(ResponseCode.UNKOWN, ResponseMessage.UNKOWN);
+
+    }
+
+  }
 }
