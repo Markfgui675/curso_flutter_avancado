@@ -6,6 +6,7 @@ import 'package:curso_flutter_avancado/domain/repository.dart';
 import 'package:dartz/dartz.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/network_info.dart';
+import 'error_handler.dart';
 
 class RepositoryImpl extends Repository{
 
@@ -17,18 +18,25 @@ class RepositoryImpl extends Repository{
   @override
   Future<Either<Failure, Authentication>> login(LoginRequest loginRequest)async {
     if(await _networkInfo.isConnected){
-      // its safe to call the api
-      final response = await _remoteDataSource.login(loginRequest);
-      if(response.status == 0){ // success
-        // return data
-        return Right(response.toDomain());
-      } else {
-        //return biz logic error
-        return Left(Failure(409, response.message?? "we have biz error logic form API side"));
+
+      try{
+        // its safe to call the api
+        final response = await _remoteDataSource.login(loginRequest);
+        if(response.status == ApiInternalStatus.SUCCESS){ // success
+          // return data
+          return Right(response.toDomain());
+        } else {
+          //return biz logic error
+          return Left(
+              Failure(response.status ?? ApiInternalStatus.FAILURE, response.message?? ResponseMessage.UNKOWN)
+          );
+        }
+      }catch(error){
+        return Left(ErrorHandler.handler(error).failure);
       }
     } else{
       // return connection error
-      return Left(Failure(501,"Please check your internet connection"));
+      return Left(DataSource.NI_INTERNNET_CONNECTION.getFailure());
     }
   }
   

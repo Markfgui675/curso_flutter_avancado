@@ -1,5 +1,4 @@
 import 'package:curso_flutter_avancado/data/network/failure.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 enum DataSource{
@@ -153,4 +152,11 @@ extension DataSourceExtension on DataSource{
     }
 
   }
+}
+
+class ApiInternalStatus{
+
+  static const int SUCCESS = 0;
+  static const int FAILURE = 0;
+
 }
