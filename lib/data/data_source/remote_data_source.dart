@@ -7,7 +7,7 @@ abstract class RemoteDataSource{
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
 }
 
-class RemoteDataSourceImplementer implements RemoteDataSource{
+class RemoteDataSourceImplementer implements RemoteDataSource{ // experimentar colocar extends no lugar de implements para testes
   AppServiceClient _appServiceClient;
 
   RemoteDataSourceImplementer(this._appServiceClient);
