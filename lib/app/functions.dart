@@ -18,9 +18,16 @@ Future<DeviceInfo> getDeviceDetails() async {
   try{
     switch(defaultTargetPlatform){
       case TargetPlatform.android:
+        var build = await deviceInfoPlugin.androidInfo;
+        name = build.brand + " "+ build.model;
+        identifier = build.id;
+        version = build.version.codename;
         break;
       case TargetPlatform.iOS:
-        // TODO: Handle this case.
+        var build = await deviceInfoPlugin.iosInfo;
+        name = build.name + " "+ build.model;
+        identifier = build.identifierForVendor!;
+        version = build.systemVersion;
         break;
     }
   } on PlatformException{

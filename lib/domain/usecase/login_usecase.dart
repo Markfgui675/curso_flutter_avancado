@@ -1,3 +1,4 @@
+import 'package:curso_flutter_avancado/app/functions.dart';
 import 'package:curso_flutter_avancado/data/network/failure.dart';
 import 'package:curso_flutter_avancado/data/request/request.dart';
 import 'package:curso_flutter_avancado/domain/repository/repository.dart';
@@ -14,7 +15,14 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication>{
 
   @override
   Future<Either<Failure, Authentication>> execute(LoginUseCaseInput input) async {
-    await _repository.login(LoginRequest(input.email!, input.password!, "imei", "deviceType"));
+    DeviceInfo deviceInfo = await getDeviceDetails();
+    return await _repository.login(
+        LoginRequest(
+            input.email!,
+            input.password!,
+            deviceInfo.identifier,
+            deviceInfo.name)
+    );
   }
 
 }
