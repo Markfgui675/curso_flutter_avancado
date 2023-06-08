@@ -26,7 +26,7 @@ class DioFactory{
       CONTENT_TYPE:APPLICATION_JSON,
       ACCEPT:APPLICATION_JSON,
       AUTHORIZATION:Constant.token,
-      DEFAULT_LANGUAGE:language // todo get lang from app prefs
+      DEFAULT_LANGUAGE:language // identifica a lingua do sistema
     };
 
     dio.options = BaseOptions(

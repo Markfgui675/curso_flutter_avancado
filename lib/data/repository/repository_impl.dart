@@ -1,8 +1,8 @@
 import 'package:curso_flutter_avancado/data/mapper/mapper.dart';
 import 'package:curso_flutter_avancado/data/network/failure.dart';
 import 'package:curso_flutter_avancado/data/request/request.dart';
-import 'package:curso_flutter_avancado/domain/model.dart';
-import 'package:curso_flutter_avancado/domain/repository.dart';
+import 'package:curso_flutter_avancado/domain/model/model.dart';
+import 'package:curso_flutter_avancado/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
 import '../data_source/remote_data_source.dart';
 import '../network/network_info.dart';

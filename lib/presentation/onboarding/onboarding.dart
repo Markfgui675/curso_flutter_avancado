@@ -5,7 +5,7 @@ import 'package:curso_flutter_avancado/presentation/resources/values_manager.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../domain/model.dart';
+import '../../domain/model/model.dart';
 import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 
