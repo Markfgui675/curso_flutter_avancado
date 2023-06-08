@@ -21,7 +21,8 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication>{
             input.email!,
             input.password!,
             deviceInfo.identifier,
-            deviceInfo.name)
+            deviceInfo.name
+        )
     );
   }
 
