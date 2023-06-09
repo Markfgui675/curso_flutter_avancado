@@ -39,7 +39,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         stream: _viewModel.outputSliderViewObject,
         builder: (_, snapShot) {
           return _getContentWidget(
-              snapShot.data!);
+              snapShot.data!
+          );
         }
     );
   }
@@ -121,7 +122,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 _pageController.animateToPage(
                     _viewModel.goPrevious(),
                     duration: const Duration(milliseconds: DurationConst.d300),
-                    curve: Curves.linear
+                    curve: Curves.easeInOutExpo
                 );
               },
               child: SizedBox(
@@ -149,8 +150,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               onTap: (){
                 _pageController.animateToPage(
                     _viewModel.goNext(),
-                    duration: const Duration(milliseconds: DurationConst.d300),
-                    curve: Curves.linear
+                    duration: const Duration(milliseconds: DurationConst.d500),
+                    curve: Curves.easeInOutExpo
                 );
               },
               child: SizedBox(

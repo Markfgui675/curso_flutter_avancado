@@ -1,5 +1,9 @@
 import 'package:curso_flutter_avancado/presentation/login/login_viewmodel.dart';
+import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+
+import '../resources/assets_manager.dart';
+import '../resources/color_manager.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -11,6 +15,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   LoginViewModel _viewModel = LoginViewModel(null); //todo pass here login useCase
+
+  final _formKey = GlobalKey<FormState>();
 
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -32,6 +38,38 @@ class _LoginViewState extends State<LoginView> {
     return Container(
       child: Center(
         child: Text('Login'),
+      ),
+    );
+  }
+
+  Widget _getContentWidget(){
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.only(top: AppPadding.p100),
+        color: ColorManager.white,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Image(image: AssetImage(ImageAssets.splashLogo), width: AppSize.s100,),
+                SizedBox(height: AppSize.s28,),
+                Padding(
+                  padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28),
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsUserNameValid,
+                    builder: (context, snapshot){
+                      return TextFormField(
+                        controller: _userNameController,
+                        keyboardType: TextInputType.emailAddress,
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
