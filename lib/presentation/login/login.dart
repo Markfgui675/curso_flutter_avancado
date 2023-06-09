@@ -41,6 +41,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _getContentWidget(){
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: Container(
         padding: EdgeInsets.only(top: AppPadding.p100),
         color: ColorManager.white,
@@ -97,11 +98,11 @@ class _LoginViewState extends State<LoginView> {
                     stream: _viewModel.outputIsAllInputsValid,// todo add me later
                     builder: (context, snapshot){
                       return ElevatedButton(
-                        onPressed: (snapshot.data ?? false)
-                          ? () {
-                              _viewModel.login();
-                            }
-                          : null,
+                        onPressed: (snapshot.data ?? true)
+                          ? null
+                          : () {
+                            _viewModel.login();
+                          },
                         child: Text(
                           AppStrings.login
                         )
