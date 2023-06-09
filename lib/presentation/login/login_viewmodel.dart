@@ -12,7 +12,7 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   var loginObject = LoginObject("","");
 
-  LoginUseCase _loginUseCase;
+  LoginUseCase? _loginUseCase; // todo remove ?
   LoginViewModel(this._loginUseCase);
 
   //inputs
@@ -35,7 +35,7 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   @override
   login() async {
-    (await _loginUseCase.execute(
+    (await _loginUseCase!.execute(
         LoginUseCaseInput(loginObject.userName, loginObject.password)
     )).fold((failure){
       // left -> failure
