@@ -61,11 +61,9 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   // outputs
   @override
-  // TODO: implement outputIsPasswordValid
   Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream.map((password) => _isPasswordValid(password));
 
   @override
-  // TODO: implement outputIsUserNameValid
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream.map((userName) => _isUserNameValid(userName));
 
   //private functions
