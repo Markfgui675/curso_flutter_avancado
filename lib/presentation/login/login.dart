@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
+import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 
 class LoginView extends StatefulWidget {
@@ -97,19 +98,58 @@ class _LoginViewState extends State<LoginView> {
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputIsAllInputsValid,// todo add me later
                     builder: (context, snapshot){
-                      return ElevatedButton(
-                        onPressed: (snapshot.data ?? true)
-                          ? null
-                          : () {
-                            _viewModel.login();
-                          },
-                        child: Text(
-                          AppStrings.login
-                        )
+                      return SizedBox(
+                        width: double.infinity,
+                        height: AppSize.s40,
+                        child: ElevatedButton(
+                            onPressed: (snapshot.data ?? true)
+                                ? null
+                                : () {
+                              _viewModel.login();
+                            },
+                            child: Text(
+                                AppStrings.login
+                            )
+                        ),
                       );
                     },
                   ),
                 ),
+
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: AppPadding.p12,
+                    left: AppPadding.p28,
+                    right: AppPadding.p28
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, Routes.forgotPasswordRoute);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                          child: Text(AppStrings.forgotPassword, textAlign: TextAlign.start,
+                            style: Theme.of(context).textTheme.subtitle2,),
+                        ),
+                      ),
+
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, Routes.registerRoute);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                          child: Text(AppStrings.register, textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.subtitle2,),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+
               ],
             ),
           ),
