@@ -14,7 +14,7 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   var loginObject = LoginObject("","");
 
-  LoginUseCase? _loginUseCase; // todo remove ?
+  LoginUseCase _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   //inputs
@@ -41,7 +41,7 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   @override
   login() async {
-    /*
+
     (await _loginUseCase!.execute(
         LoginUseCaseInput(loginObject.userName, loginObject.password)
     )).fold((failure){
@@ -52,7 +52,6 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
       print(data.customer!.name);
     });
 
-     */
   }
 
   @override
