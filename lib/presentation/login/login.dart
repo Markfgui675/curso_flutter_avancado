@@ -1,7 +1,8 @@
 import 'package:curso_flutter_avancado/data/data_source/remote_data_source.dart';
 import 'package:curso_flutter_avancado/presentation/login/login_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
-import 'package:flutter/material.dart';import '../../data/repository/repository_impl.dart';
+import 'package:flutter/material.dart';import '../../app/di.dart';
+import '../../data/repository/repository_impl.dart';
 import '../../domain/repository/repository.dart';
 
 
@@ -20,7 +21,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  LoginViewModel _viewModel = LoginViewModel(loginUseCase);
+  LoginViewModel _viewModel = instance<LoginViewModel>();
 
   final _formKey = GlobalKey<FormState>();
 
