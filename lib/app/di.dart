@@ -2,6 +2,7 @@ import 'package:curso_flutter_avancado/app/app_preferences.dart';
 import 'package:curso_flutter_avancado/data/network/network_info.dart';
 import 'package:curso_flutter_avancado/data/repository/repository_impl.dart';
 import 'package:curso_flutter_avancado/domain/repository/repository.dart';
+import 'package:curso_flutter_avancado/domain/usecase/login_usecase.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../data/data_source/remote_data_source.dart';
 import '../data/network/app_api.dart';
 import '../data/network/dio_factory.dart';
+import '../presentation/login/login_viewmodel.dart';
 
 
 // di -> dependency injection
@@ -43,5 +45,11 @@ Future<void> initAppModule() async {
   // repository
   instance.registerLazySingleton<Repository>(() => RepositoryImpl(instance(), instance()));
 
+}
 
+initLoginModule(){
+  if(GetIt.I.isRegistered<LoginUseCase>()){
+    instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+    instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
 }
