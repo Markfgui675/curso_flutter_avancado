@@ -42,10 +42,10 @@ class StateRenderer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _getStateWidget(context);
   }
 
-  Widget _getStateWidget(){
+  Widget _getStateWidget(BuildContext context){
 
     switch(stateRendererType){
       case StateRendererType.POPUP_LOADING_STATE:
@@ -66,7 +66,7 @@ class StateRenderer extends StatelessWidget {
             [
               _getAnimatedImage(),
               _getMessage(failure.message),
-              _getRetryButton(AppStrings.retryAgain)
+              _getRetryButton(AppStrings.retryAgain, context)
             ]
         );
       case StateRendererType.CONTENT_SCREEN_STATE:
@@ -91,15 +91,32 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getMessage(String message){
-    return Text(
-      message, style: getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(AppPadding.p18),
+        child: Text(
+          message, style: getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
+        ),
+      ),
     );
   }
 
-  Widget _getRetryButton(String buttonTitle){
-    return ElevatedButton(
-      onPressed: (){},
-      child: Text(buttonTitle)
+  Widget _getRetryButton(String buttonTitle, BuildContext context){
+    return Padding(
+      padding: EdgeInsets.all(AppPadding.p18),
+      child: SizedBox(
+        width: AppSize.s180,
+        child: ElevatedButton(
+            onPressed: (){
+              if(stateRendererType == StateRendererType.FULL_SCREEN_ERROR_STATE){
+                retryActionFunction.call(); // to call the API function again to retry
+              } else {
+                Navigator.of(context).pop(); // popup state error, so we need to dismiss the dialog
+              }
+            },
+            child: Text(buttonTitle)
+        ),
+      ),
     );
   }
 
