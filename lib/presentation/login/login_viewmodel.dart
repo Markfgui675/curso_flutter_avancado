@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:curso_flutter_avancado/domain/usecase/login_usecase.dart';
 import 'package:curso_flutter_avancado/presentation/base/baseviewmodel.dart';
-
 import '../common/freezed_data_classes.dart';
 
 class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewModelOutputs{
@@ -42,7 +40,7 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
   @override
   login() async {
 
-    (await _loginUseCase!.execute(
+    (await _loginUseCase.execute(
         LoginUseCaseInput(loginObject.userName, loginObject.password)
     )).fold((failure){
       // left -> failure
