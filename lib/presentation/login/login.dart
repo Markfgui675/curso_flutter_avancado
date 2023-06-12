@@ -1,12 +1,6 @@
-import 'package:curso_flutter_avancado/data/data_source/remote_data_source.dart';
 import 'package:curso_flutter_avancado/presentation/login/login_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';import '../../app/di.dart';
-import '../../data/repository/repository_impl.dart';
-import '../../domain/repository/repository.dart';
-
-
-import '../../domain/usecase/login_usecase.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
 import '../resources/routes_manager.dart';
