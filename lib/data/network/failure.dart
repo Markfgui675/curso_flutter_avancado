@@ -1,3 +1,5 @@
+import '../repository/error_handler.dart';
+
 class Failure{
 
   int code; //200 or 400
@@ -5,4 +7,8 @@ class Failure{
 
   Failure(this.code, this.message);
 
+}
+
+class DefaultFailure extends Failure{
+  DefaultFailure():super(ResponseCode.UNKOWN, ResponseMessage.UNKOWN);
 }
