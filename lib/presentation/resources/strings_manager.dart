@@ -9,7 +9,8 @@ class AppStrings{
   static const String userNameError = "Username error";
   static const String passwordError = "Password error";
   static const String register = "Sign up";
-  static const String retryAgain= "Retry Again";
+  static const String retryAgain = "Retry Again";
+  static const String ok = "Ok";
   static const String onBoardingTitle1 = "SEE THE BEST COURSE #1";
   static const String onBoardingTitle2 = "SEE THE BEST COURSE #2";
   static const String onBoardingTitle3 = "SEE THE BEST COURSE #3";
