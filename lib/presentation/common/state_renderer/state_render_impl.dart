@@ -86,12 +86,28 @@ extension FlowStateExtension on FlowState{
           );
         }
       case ErrorState:
-        break;
+        if(stateRendererType() == StateRendererType.POPUP_ERROR_STATE){
+          // showing popup dialog
+          showPopUp(context, stateRendererType(), getMessage());
+          //return the content ui of the screen
+          return contentScreen;
+        }else{
+          return StateRenderer(
+              stateRendererType: stateRendererType(),
+              message: getMessage(),
+              retryActionFunction: retryActionFunction
+          );
+        }
       case ContentState:
-        break;
+        return contentScreen;
       case EmptyState:
-        break;
+        return StateRenderer(
+            stateRendererType: stateRendererType(),
+            retryActionFunction: retryActionFunction,
+            message: getMessage(),
+        );
       default:
+        return contentScreen;
 
     }
   }
