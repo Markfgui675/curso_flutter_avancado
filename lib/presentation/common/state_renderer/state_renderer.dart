@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../data/mapper/mapper.dart';
 import '../../../data/network/failure.dart';
+import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/strings_manager.dart';
@@ -50,25 +52,25 @@ class StateRenderer extends StatelessWidget {
     switch(stateRendererType){
       case StateRendererType.POPUP_LOADING_STATE:
         return _getPopUpDialog(context, [
-          _getAnimatedImage()
+          _getAnimatedImage(JsonAssets.loadingAnimation)
         ]);
       case StateRendererType.POPUP_ERROR_STATE:
         return _getPopUpDialog(context, [
-          _getAnimatedImage(),
+          _getAnimatedImage(JsonAssets.errorAnimation),
           _getMessage(failure.message),
           _getRetryButton(AppStrings.retryAgain, context)
         ]);
       case StateRendererType.FULL_SCREE_LOADING_STATE:
         return _getItemsInColumn(
             [
-              _getAnimatedImage(),
+              _getAnimatedImage(JsonAssets.loadingAnimation),
               _getMessage(message)
             ]
         );
       case StateRendererType.FULL_SCREEN_ERROR_STATE:
         return _getItemsInColumn(
             [
-              _getAnimatedImage(),
+              _getAnimatedImage(JsonAssets.errorAnimation),
               _getMessage(failure.message),
               _getRetryButton(AppStrings.retryAgain, context)
             ]
@@ -78,16 +80,19 @@ class StateRenderer extends StatelessWidget {
       case StateRendererType.EMPTY_SCREEN_STATE:
         return _getItemsInColumn(
             [
-              _getAnimatedImage(),
+              _getAnimatedImage(JsonAssets.emptyAnimation),
               _getMessage(message)
             ]
         );
       default:
         return Container();
     }
-    return Container();
-
   }
+
+
+
+
+
 
   Widget _getPopUpDialog(BuildContext context, List<Widget> children){
     return Dialog(
@@ -119,11 +124,11 @@ class StateRenderer extends StatelessWidget {
     );
   }
 
-  Widget _getAnimatedImage(){
+  Widget _getAnimatedImage(String animationName){
     return SizedBox(
       height: AppSize.s100,
       width: AppSize.s100,
-      child: , // json image
+      child: Lottie.asset(animationName), // json image
     );
   }
 
