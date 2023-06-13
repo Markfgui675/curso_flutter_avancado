@@ -1,5 +1,6 @@
 import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_renderer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../data/mapper/mapper.dart';
 import '../../resources/strings_manager.dart';
@@ -72,7 +73,18 @@ extension FlowStateExtension on FlowState{
   Widget getScreenWidget(BuildContext context, Widget contentScreen, Function retryActionFunction){
     switch(this.runtimeType){
       case LoadingState:
-        break;
+        if(stateRendererType() == StateRendererType.POPUP_LOADING_STATE){
+          // showing popup dialog
+          showPopUp(context, stateRendererType(), getMessage());
+          //return the content ui of the screen
+          return contentScreen;
+        }else{
+          return StateRenderer(
+              stateRendererType: stateRendererType(),
+              message: getMessage(),
+              retryActionFunction: retryActionFunction
+          );
+        }
       case ErrorState:
         break;
       case ContentState:
@@ -83,4 +95,19 @@ extension FlowStateExtension on FlowState{
 
     }
   }
+
+  showPopUp(BuildContext context, StateRendererType stateRendererType, String message){
+    
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) { 
+      showDialog(context: context, builder: (BuildContext context) =>
+          StateRenderer(
+            stateRendererType: stateRendererType,
+            message: message,
+            retryActionFunction: (){},
+          )
+      );
+    });
+    
+  }
+
 }
