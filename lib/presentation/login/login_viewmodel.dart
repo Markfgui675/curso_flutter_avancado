@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:curso_flutter_avancado/domain/usecase/login_usecase.dart';
 import 'package:curso_flutter_avancado/presentation/base/baseviewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_renderer.dart';
 import '../common/freezed_data_classes.dart';
 
 class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewModelOutputs{
@@ -41,15 +42,19 @@ class LoginViewModel extends BaseViewModel with LoginViewModelInputs, LoginViewM
 
   @override
   login() async {
-
+    inputState.add(LoadingState(null,StateRendererType.POPUP_LOADING_STATE));
     (await _loginUseCase.execute(
         LoginUseCaseInput(loginObject.userName, loginObject.password)
     )).fold((failure){
       // left -> failure
+      inputState.add(ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE));
       print(failure.message);
     }, (data) {
       // right -> success (data)
+      inputState.add(ContentState());
       print(data.customer!.name);
+
+      //navigate to mais screen after the login
     });
 
   }
