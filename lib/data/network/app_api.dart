@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 import '../../app/constant.dart';
@@ -16,5 +18,8 @@ abstract class AppServiceClient{
       @Field("imei") String imei,
       @Field("deviceType") String deviceType,
   );
+
+  @POST("/customers/forgotPassword")
+  Future<ForgotPasswordResponse> forgotPassword(@Field("email") String email);
 
 }
