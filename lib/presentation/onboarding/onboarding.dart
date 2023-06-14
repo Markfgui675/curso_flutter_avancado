@@ -1,3 +1,4 @@
+import 'package:curso_flutter_avancado/app/app_preferences.dart';
 import 'package:curso_flutter_avancado/presentation/onboarding/onboarding_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/assets_manager.dart';
 import 'package:curso_flutter_avancado/presentation/resources/color_manager.dart';
@@ -5,6 +6,7 @@ import 'package:curso_flutter_avancado/presentation/resources/values_manager.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../app/di.dart';
 import '../../domain/model/model.dart';
 import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
@@ -18,12 +20,15 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
 
+  AppPreferences _appPreferences = instance<AppPreferences>();
+
   final PageController _pageController = PageController(
       initialPage: 0);
 
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
   _bind() {
+    _appPreferences.setOnBoardingScreenViewed();
     _viewModel.start();
   }
 

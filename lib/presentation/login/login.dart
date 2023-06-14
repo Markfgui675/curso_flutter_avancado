@@ -1,7 +1,8 @@
 import 'package:curso_flutter_avancado/presentation/login/login_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';import '../../app/di.dart';
+import 'package:flutter/scheduler.dart';import '../../app/app_preferences.dart';
+import '../../app/di.dart';
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
@@ -18,6 +19,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   LoginViewModel _viewModel = instance<LoginViewModel>();
+  AppPreferences _appPreferences = instance<AppPreferences>();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -31,6 +33,7 @@ class _LoginViewState extends State<LoginView> {
     _viewModel.isUserLoggedInSuccessfullyStreamController.stream.listen((isSuccessLoggedIn){
       // navigate to mais screen
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _appPreferences.setUserLoggedIn();
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
       });
     });
