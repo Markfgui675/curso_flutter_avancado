@@ -1,6 +1,7 @@
 import 'package:curso_flutter_avancado/presentation/login/login_viewmodel.dart';
 import 'package:curso_flutter_avancado/presentation/resources/values_manager.dart';
-import 'package:flutter/material.dart';import '../../app/di.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';import '../../app/di.dart';
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
@@ -27,6 +28,12 @@ class _LoginViewState extends State<LoginView> {
     _viewModel.start();
     _userNameController.addListener(() => _viewModel.setUserName(_userNameController.text));
     _passwordController.addListener(() => _viewModel.setPassword(_passwordController.text));
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream.listen((isSuccessLoggedIn){
+      // navigate to mais screen
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
+    });
   }
 
   @override

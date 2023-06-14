@@ -17,8 +17,8 @@ class RemoteDataSourceImplementer implements RemoteDataSource{ // experimentar c
     return await _appServiceClient.login(
         loginRequest.email,
         loginRequest.password,
-        loginRequest.imei,
-        loginRequest.deviceType
+        "",
+        ""
     );
   }
 
