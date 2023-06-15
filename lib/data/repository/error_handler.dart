@@ -91,7 +91,7 @@ class ResponseCode{
 
 class ResponseMessage{
   // API status codes
-  static const String SUCCESS = "succes";
+  static const String SUCCESS = "success";
   static const String NO_CONTENT = "success with no data"; //success with no data
   static const String BAD_REQUEST = "Bad request, try again later"; //failure, api rejected the request
   static const String FORBIDDEN = "Forbidden request, try again later"; //failure, api rejected the request

@@ -65,11 +65,11 @@ class RepositoryImpl extends Repository{
   }
 
   @override
-  Future<Either<Failure, String>> register(RegisterRequest registerRequest) async {
+  Future<Either<Failure, Authentication>> register(RegisterRequest registerRequest) async {
     if(await _networkInfo.isConnected){
       try{
         // its safe to call the api
-        final response = await _remoteDataSource.forgotPassword(email);
+        final response = await _remoteDataSource.register(registerRequest);
         if(response.status == ApiInternalStatus.SUCCESS){ // success
           // return data
           return Right(response.toDomain());
