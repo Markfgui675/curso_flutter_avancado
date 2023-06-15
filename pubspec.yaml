@@ -48,6 +48,7 @@ flutter:
     - assets/json/empty-box.json
     - assets/json/error.json
     - assets/json/loading-animation.json
+    - assets/json/success.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

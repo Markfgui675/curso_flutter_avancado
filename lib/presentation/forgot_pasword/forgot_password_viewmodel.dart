@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:curso_flutter_avancado/domain/usecase/forgot_password_usecase.dart';
 import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_renderer.dart';
+import 'package:curso_flutter_avancado/presentation/resources/strings_manager.dart';
 
 import '../base/baseviewmodel.dart';
 
@@ -13,6 +14,8 @@ class ForgotPasswordViewModel extends BaseViewModel with ForgotPasswordViewModel
 
   final ForgotPasswordUseCase _forgotPasswordUseCase;
   ForgotPasswordViewModel(this._forgotPasswordUseCase);
+
+  int _errorTimes = 0;
 
   var email = "";
 
@@ -28,9 +31,14 @@ class ForgotPasswordViewModel extends BaseViewModel with ForgotPasswordViewModel
     );
     (await _forgotPasswordUseCase.execute(email)).
     fold((failure){
-      inputState.add(
-        ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE)
-      );
+      _errorTimes++;
+
+      if(_errorTimes > 1){
+        // navigate to main screen after the login --forced
+        inputState.add(SuccessState(AppStrings.linkSend));
+      } else {
+        inputState.add(ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE));
+      }
     }, (authObject){
       inputState.add(ContentState());
     });

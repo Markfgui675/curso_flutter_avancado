@@ -19,5 +19,6 @@ class JsonAssets{
   static const String emptyAnimation = "$JSON_PATH/empty-box.json";
   static const String errorAnimation = "$JSON_PATH/error.json";
   static const String loadingAnimation = "$JSON_PATH/loading-animation.json";
+  static const String success = "$JSON_PATH/success.json";
 
 }
