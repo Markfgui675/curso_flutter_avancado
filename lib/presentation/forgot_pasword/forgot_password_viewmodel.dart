@@ -12,7 +12,6 @@ class ForgotPasswordViewModel extends BaseViewModel with ForgotPasswordViewModel
   final StreamController _isAllInputsValidStreamController = StreamController<void>.broadcast();
 
   final ForgotPasswordUseCase _forgotPasswordUseCase;
-
   ForgotPasswordViewModel(this._forgotPasswordUseCase);
 
   var email = "";
@@ -57,21 +56,17 @@ class ForgotPasswordViewModel extends BaseViewModel with ForgotPasswordViewModel
   }
 
   @override
-  Stream<bool> get outputIsAllInputValid => _emailStreamController.stream.map((email) => isEmailValid(email));
+  Stream<bool> get outputIsAllInputValid => _emailStreamController.stream.map((email) => _isAllInputValid(email));
 
   @override
-  Stream<bool> get outputIsEmailValid => _isAllInputsValidStreamController.stream.map((isAllInputValid) => _isAllInputValid());
+  Stream<bool> get outputIsEmailValid => _isAllInputsValidStreamController.stream.map((email) => _isAllInputValid(email));
 
   _validate(){
     inputIsAllInputValid.add(null);
   }
 
-  _isAllInputValid(){
-    return isEmailValid(email);
-  }
-
-  isEmailValid(String email){
-
+  bool _isAllInputValid(String email){
+    return email.contains("@") && email.contains(".com");
   }
 
 }

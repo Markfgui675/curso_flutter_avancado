@@ -1,7 +1,5 @@
 import 'package:curso_flutter_avancado/presentation/common/state_renderer/state_renderer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../data/mapper/mapper.dart';
 import '../../resources/strings_manager.dart';
 

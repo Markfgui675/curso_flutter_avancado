@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
 import '../../app/constant.dart';

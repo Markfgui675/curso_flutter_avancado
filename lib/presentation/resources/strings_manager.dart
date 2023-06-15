@@ -3,11 +3,14 @@ class AppStrings{
   static const String noRouteFound = "No Route Found";
   static const String skip = "Skip";
   static const String userName = "Username";
+  static const String email = "Email";
   static const String password = "Password";
   static const String login = "Login";
   static const String forgotPassword = "Forgot Password";
+  static const String resetPassword = "Reset Password";
   static const String userNameError = "Username error";
   static const String passwordError = "Password error";
+  static const String emailError = "Email error";
   static const String register = "Sign up";
   static const String retryAgain = "Retry Again";
   static const String ok = "Ok";

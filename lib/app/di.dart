@@ -2,7 +2,9 @@ import 'package:curso_flutter_avancado/app/app_preferences.dart';
 import 'package:curso_flutter_avancado/data/network/network_info.dart';
 import 'package:curso_flutter_avancado/data/repository/repository_impl.dart';
 import 'package:curso_flutter_avancado/domain/repository/repository.dart';
+import 'package:curso_flutter_avancado/domain/usecase/forgot_password_usecase.dart';
 import 'package:curso_flutter_avancado/domain/usecase/login_usecase.dart';
+import 'package:curso_flutter_avancado/presentation/forgot_pasword/forgot_password_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,4 +48,9 @@ Future<void> initAppModule() async {
 initLoginModule(){
   instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
   instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+}
+
+initForgotPasswordModule(){
+  instance.registerFactory<ForgotPasswordUseCase>(() => ForgotPasswordUseCase(instance()));
+  instance.registerFactory<ForgotPasswordViewModel>(() => ForgotPasswordViewModel(instance()));
 }
