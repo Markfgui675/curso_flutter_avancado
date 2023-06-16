@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:html';
+import 'package:curso_flutter_avancado/presentation/common/freezed_data_classes.dart';
+
 import '../../domain/usecase/register_usecase.dart';
 import '../base/baseviewmodel.dart';
 
@@ -15,6 +17,8 @@ RegisterViewModelOutput{
 
   RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase);
+
+  var registerViewObject = RegisterObject("", "", "", "", "", "");
 
   @override
   void start() {
