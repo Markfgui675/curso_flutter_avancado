@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:html';
 import '../../domain/usecase/register_usecase.dart';
 import '../base/baseviewmodel.dart';
 
@@ -30,5 +30,32 @@ class RegisterViewModel extends BaseViewModel{
     _isAllInputsValidStreamController.close();
     super.dispose();
   }
+
+}
+
+abstract class RegisterViewModelInput{
+  register();
+
+  Sink get inputUserName;
+  Sink get inputMobileNumber;
+  Sink get inputEmail;
+  Sink get inputPassword;
+  Sink get inputProfilePicture;
+}
+abstract class RegisterViewModelOutput{
+  Stream<bool> get outputIsUserNameValid;
+  Stream<String> get outputErrorUserName;
+
+  Stream<bool> get outputIsMobileNumberValid;
+  Stream<String> get outputErrorMobileNumber;
+
+  Stream<bool> get outputIsEmailValid;
+  Stream<String> get outputErrorEmail;
+
+  Stream<bool> get outputIsPasswordValid;
+  Stream<String> get outputErrorPassword;
+
+  Stream<File> get outputIsProfilePictureValid;
+  Stream<String> get outputErrorProfilePicture;
 
 }
