@@ -50,6 +50,9 @@ RegisterViewModelOutput{
   @override
   Sink get inputUserName => _userNameStreamController.sink;
 
+  @override
+  Sink get inputAllInputsValid => _isAllInputsValidStreamController.sink;
+
 
 
 
@@ -87,9 +90,21 @@ RegisterViewModelOutput{
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream.map((userName) => _isUserNameValid(userName));
 
   @override
+  Stream<bool> get outputIsAllInputsValid => _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
+
+  @override
   register() {
     // TODO: implement register
     throw UnimplementedError();
+  }
+
+  bool _validateAllInputs(){
+   return registerViewObject.profilePicture.isNotEmpty &&
+    registerViewObject.email.isNotEmpty &&
+    registerViewObject.userName.isNotEmpty &&
+    registerViewObject.password.isNotEmpty &&
+    registerViewObject.mobileNumber.isNotEmpty &&
+    registerViewObject.countryMobileCode.isNotEmpty;
   }
 
   bool _isEmailValid(String email) => email.contains("@")&&email.contains(".com");
@@ -100,6 +115,10 @@ RegisterViewModelOutput{
 
   bool _isUserNameValid(String userName) => userName.length >= 8;
 
+  _validate(){
+    _isAllInputsValidStreamController.add(null);
+  }
+
   @override
   setCountryCode(String countryCode) {
     if(countryCode.isNotEmpty){
@@ -109,6 +128,7 @@ RegisterViewModelOutput{
       // reset username value in register view object
       registerViewObject = registerViewObject.copyWith(userName: "");
     }
+    _validate();
   }
 
   @override
@@ -120,6 +140,7 @@ RegisterViewModelOutput{
       // reset email value in register view object
       registerViewObject = registerViewObject.copyWith(email: "");
     }
+    _validate();
   }
 
   @override
@@ -131,6 +152,7 @@ RegisterViewModelOutput{
       // reset username value in register view object
       registerViewObject = registerViewObject.copyWith(mobileNumber: "");
     }
+    _validate();
   }
 
   @override
@@ -142,6 +164,7 @@ RegisterViewModelOutput{
       // reset password value in register view object
       registerViewObject = registerViewObject.copyWith(password: "");
     }
+    _validate();
   }
 
   @override
@@ -153,6 +176,7 @@ RegisterViewModelOutput{
       // reset username value in register view object
       registerViewObject = registerViewObject.copyWith(profilePicture: "");
     }
+    _validate();
   }
 
   @override
@@ -164,6 +188,7 @@ RegisterViewModelOutput{
       // reset username value in register view object
       registerViewObject = registerViewObject.copyWith(userName: "");
     }
+    _validate();
   }
 
 }
@@ -182,6 +207,7 @@ abstract class RegisterViewModelInput{
   Sink get inputEmail;
   Sink get inputPassword;
   Sink get inputProfilePicture;
+  Sink get inputAllInputsValid;
 }
 
 abstract class RegisterViewModelOutput{
@@ -198,5 +224,7 @@ abstract class RegisterViewModelOutput{
   Stream<String?> get outputErrorPassword;
 
   Stream<File> get outputIsProfilePictureValid;
+
+  Stream<bool> get outputIsAllInputsValid;
 
 }
