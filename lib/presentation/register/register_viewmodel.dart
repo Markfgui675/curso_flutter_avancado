@@ -51,36 +51,38 @@ RegisterViewModelOutput{
 
 
   @override
-  Stream<String?> get outputErrorEmail => throw UnimplementedError();
+  Stream<String?> get outputErrorEmail =>
+      outputIsEmailValid.map((isEmailValid) => isEmailValid ? null:"Email invalid");
 
   @override
-  Stream<String?> get outputErrorMobileNumber => throw UnimplementedError();
+  Stream<String?> get outputErrorMobileNumber =>
+      outputIsMobileNumberValid.map((isMobileNumberValid) => isMobileNumberValid ? null:"Mobile number invalid");
 
   @override
-  Stream<String?> get outputErrorPassword => throw UnimplementedError();
+  Stream<String?> get outputErrorPassword =>
+      outputIsPasswordValid.map((isPasswordValid) => isPasswordValid ? null:"Password invalid");
 
   @override
-  Stream<String?> get outputErrorProfilePicture => throw UnimplementedError();
+  Stream<String?> get outputErrorProfilePicture =>
+      outputIsProfilePictureValid.map((isProfilePictureValid) => isProfilePictureValid ? null:"Profile Picture invalid");
+
+  @override
+  Stream<String?> get outputErrorUserName =>
+      outputIsUserNameValid.map((isUserNameValid) => isUserNameValid ? null:"Invalid username");
+
 
 
   @override
-  Stream<String?> get outputErrorUserName => outputIsUserNameValid.map((isUserNameValid) => isUserNameValid ? null:"Invalid username");
+  Stream<bool> get outputIsEmailValid => _emailStreamController.stream.map((email) => _isEmailValid(email));
 
   @override
-  // TODO: implement outputIsEmailValid
-  Stream<bool> get outputIsEmailValid => throw UnimplementedError();
+  Stream<bool> get outputIsMobileNumberValid => _mobileNumberStreamController.stream.map((mobileNumber) => _isMobileNumberValid(mobileNumber));
 
   @override
-  // TODO: implement outputIsMobileNumberValid
-  Stream<bool> get outputIsMobileNumberValid => throw UnimplementedError();
+  Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream.map((password) => _isPasswordValid(password));
 
   @override
-  // TODO: implement outputIsPasswordValid
-  Stream<bool> get outputIsPasswordValid => throw UnimplementedError();
-
-  @override
-  // TODO: implement outputIsProfilePictureValid
-  Stream<File> get outputIsProfilePictureValid => throw UnimplementedError();
+  Stream<File> get outputIsProfilePictureValid => _profilePictureStreamController.stream.map((file) => file);
 
   @override
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream.map((userName) => _isUserNameValid(userName));
@@ -91,9 +93,13 @@ RegisterViewModelOutput{
     throw UnimplementedError();
   }
 
-  bool _isUserNameValid(String userName){
-    return userName.length >= 8;
-  }
+  bool _isEmailValid(String email) => email.contains("@")&&email.contains(".com");
+
+  bool _isMobileNumberValid(String mobileNumber) => mobileNumber.isNotEmpty;
+
+  bool _isPasswordValid(String password) => password.isNotEmpty;
+
+  bool _isUserNameValid(String userName) => userName.length >= 8;
 
 }
 
