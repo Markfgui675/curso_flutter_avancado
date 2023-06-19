@@ -3,6 +3,8 @@ import 'package:curso_flutter_avancado/presentation/common/freezed_data_classes.
 import 'dart:io';
 import '../../domain/usecase/register_usecase.dart';
 import '../base/baseviewmodel.dart';
+import '../common/state_renderer/state_render_impl.dart';
+import '../common/state_renderer/state_renderer.dart';
 
 class RegisterViewModel extends BaseViewModel with RegisterViewModelInput,
 RegisterViewModelOutput{
@@ -19,9 +21,45 @@ RegisterViewModelOutput{
 
   var registerViewObject = RegisterObject("", "", "", "", "", "");
 
+  int _errorTimes = 0;
+
   @override
   void start() {
-    // TODO: implement start
+    inputState.add(ContentState());
+  }
+
+  @override
+  register() async {
+    inputState.add(LoadingState(null,StateRendererType.POPUP_LOADING_STATE));
+    (await _registerUseCase.execute(
+      RegisterUseCaseInput(
+        registerViewObject.email,
+        registerViewObject.password,
+        registerViewObject.mobileNumber,
+        registerViewObject.userName,
+        registerViewObject.profilePicture,
+        registerViewObject.countryMobileCode
+      )
+    )).fold((failure){
+    // left -> failure
+    _errorTimes++;
+
+    if(_errorTimes > 1){
+      // navigate to main screen after the login --forced
+      isUserLoggedInSuccessfullyStreamController.add(true);
+    } else {
+      inputState.add(ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE));
+    }
+
+    print(failure.message);
+    }, (data) {
+    // right -> success (data)
+      inputState.add(ContentState());
+      print(data.customer!.name);
+
+      //navigate to mais screen after the login
+      isUserLoggedInSuccessfullyStreamController.add(true);
+    });
   }
 
   @override
@@ -91,12 +129,6 @@ RegisterViewModelOutput{
 
   @override
   Stream<bool> get outputIsAllInputsValid => _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
-
-  @override
-  register() {
-    // TODO: implement register
-    throw UnimplementedError();
-  }
 
   bool _validateAllInputs(){
    return registerViewObject.profilePicture.isNotEmpty &&
