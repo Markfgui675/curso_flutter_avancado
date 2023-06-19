@@ -17,6 +17,8 @@ class AppStrings{
   static const String profilePicture = "Profile Picture";
   static const String ok = "Ok";
   static const String success = "Success";
+  static const String photoGallery = "Photo from gallery";
+  static const String photoCamera = "Photo from camera";
   static const String linkSend = "Link send to your email";
   static const String onBoardingTitle1 = "SEE THE BEST COURSE #1";
   static const String onBoardingTitle2 = "SEE THE BEST COURSE #2";
