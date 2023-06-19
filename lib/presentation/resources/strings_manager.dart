@@ -12,6 +12,7 @@ class AppStrings{
   static const String passwordError = "Password error";
   static const String emailError = "Email error";
   static const String register = "Sign up";
+  static const String mobileNumber = "Mobile Number";
   static const String retryAgain = "Retry Again";
   static const String ok = "Ok";
   static const String success = "Success";

@@ -24,6 +24,7 @@ dependencies:
   freezed:
   get_it:
   lottie:
+  country_code_picker:
 
 dev_dependencies:
   flutter_test:

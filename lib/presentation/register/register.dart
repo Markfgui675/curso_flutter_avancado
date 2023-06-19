@@ -1,10 +1,13 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curso_flutter_avancado/presentation/register/register_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/di.dart';
+import '../../data/mapper/mapper.dart';
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
+import '../resources/routes_manager.dart';
 import '../resources/strings_manager.dart';
 import '../resources/values_manager.dart';
 
@@ -72,7 +75,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _getContentWidget(){
     return Container(
-      padding: EdgeInsets.only(top: AppPadding.p100),
+      padding: EdgeInsets.only(top: AppPadding.p60),
       color: ColorManager.white,
       child: SingleChildScrollView(
         child: Form(
@@ -88,11 +91,75 @@ class _RegisterViewState extends State<RegisterView> {
                   builder: (context, snapshot){
                     return TextFormField(
                       controller: _userTextEditingController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       cursorColor: ColorManager.primary,
                       decoration: InputDecoration(
                           hintText: AppStrings.userName,
                           labelText: AppStrings.userName,
+                          errorText: snapshot.data
+
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: AppSize.s28,),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28, bottom: AppPadding.p28),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: CountryCodePicker(
+                          onChanged: (country){
+                            // update view model with the selected code
+                            _viewModel.setCountryCode(country.dialCode ?? EMPTY);
+                          },
+                          initialSelection: "+33",
+                          showCountryOnly: true,
+                          showOnlyCountryWhenClosed: true,
+
+                          favorite: [
+                            "+966","+02","+39"
+                          ],
+                        )
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: StreamBuilder<String?>(
+                          stream: _viewModel.outputErrorMobileNumber,
+                          builder: (context, snapshot){
+                            return TextFormField(
+                              controller: _mobileNumberTextEditingController,
+                              keyboardType: TextInputType.number,
+                              cursorColor: ColorManager.primary,
+                              decoration: InputDecoration(
+                                  hintText: AppStrings.mobileNumber,
+                                  labelText: AppStrings.mobileNumber,
+                                  errorText: snapshot.data
+
+                              ),
+                            );
+                          },
+                        )
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorEmail,
+                  builder: (context, snapshot){
+                    return TextFormField(
+                      controller: _emailTextEditingController,
+                      keyboardType: TextInputType.emailAddress,
+                      cursorColor: ColorManager.primary,
+                      decoration: InputDecoration(
+                          hintText: AppStrings.email,
+                          labelText: AppStrings.email,
                           errorText: snapshot.data
 
                       ),

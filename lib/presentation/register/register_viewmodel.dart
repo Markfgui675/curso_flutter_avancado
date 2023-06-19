@@ -46,7 +46,7 @@ RegisterViewModelOutput{
 
     if(_errorTimes > 1){
       // navigate to main screen after the login --forced
-      isUserLoggedInSuccessfullyStreamController.add(true);
+      //isUserLoggedInSuccessfullyStreamController.add(true);
     } else {
       inputState.add(ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE));
     }
@@ -58,7 +58,7 @@ RegisterViewModelOutput{
       print(data.customer!.name);
 
       //navigate to mais screen after the login
-      isUserLoggedInSuccessfullyStreamController.add(true);
+      //isUserLoggedInSuccessfullyStreamController.add(true);
     });
   }
 
