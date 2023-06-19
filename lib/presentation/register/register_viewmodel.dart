@@ -122,7 +122,7 @@ RegisterViewModelOutput{
   Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream.map((password) => _isPasswordValid(password));
 
   @override
-  Stream<File> get outputIsProfilePictureValid => _profilePictureStreamController.stream.map((file) => file);
+  Stream<File> get outputProfilePicture => _profilePictureStreamController.stream.map((file) => file);
 
   @override
   Stream<bool> get outputIsUserNameValid => _userNameStreamController.stream.map((userName) => _isUserNameValid(userName));
@@ -255,7 +255,7 @@ abstract class RegisterViewModelOutput{
   Stream<bool> get outputIsPasswordValid;
   Stream<String?> get outputErrorPassword;
 
-  Stream<File> get outputIsProfilePictureValid;
+  Stream<File> get outputProfilePicture;
 
   Stream<bool> get outputIsAllInputsValid;
 

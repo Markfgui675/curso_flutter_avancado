@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curso_flutter_avancado/presentation/register/register_viewmodel.dart';
 import 'package:flutter/material.dart';
-
 import '../../app/di.dart';
 import '../../data/mapper/mapper.dart';
 import '../common/state_renderer/state_render_impl.dart';
@@ -268,7 +268,36 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _getMediaWidget(){
-    return ;
+    return Padding(
+      padding: EdgeInsets.only(left: AppPadding.p8, right: AppPadding.p8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text(AppStrings.profilePicture),
+          ),
+          Flexible(
+            child: StreamBuilder<File>(
+              stream: _viewModel.outputProfilePicture,
+              builder: (context, snapshot){
+                return _imagePickedByUser(snapshot.data);
+              },
+            ),
+          ),
+          Flexible(
+            child: Icon(Icons.photo_camera),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _imagePickedByUser(File? image){
+    if(image != null && image.path.isNotEmpty){
+      return Image.file(image);
+    } else {
+      return Container();
+    }
   }
 
   @override
