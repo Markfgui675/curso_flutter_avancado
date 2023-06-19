@@ -25,7 +25,6 @@ dependencies:
   get_it:
   lottie:
   country_code_picker:
-  image_picker:
 
 dev_dependencies:
   flutter_test:

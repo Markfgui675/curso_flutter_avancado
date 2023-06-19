@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curso_flutter_avancado/presentation/register/register_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../app/di.dart';
 import '../../data/mapper/mapper.dart';
 import '../common/state_renderer/state_render_impl.dart';
@@ -22,7 +21,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
 
   RegisterViewModel _viewModel = instance<RegisterViewModel>();
-  ImagePicker picker = instance<ImagePicker>();
+  //ImagePicker picker = instance<ImagePicker>();
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _userTextEditingController = TextEditingController();
@@ -302,45 +301,17 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   _showPicker(BuildContext context){
-    showModalBottomSheet(
-      context: context,
-      builder: (context){
-        return SafeArea(
-          child: Wrap(
-            children: [
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.camera),
-                title: Text(AppStrings.photoGallery),
-                onTap: (){
-                  _imageFromGallery();
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.camera_alt),
-                title: Text(AppStrings.photoGallery),
-                onTap: (){
-                  _imageFromCamera();
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          )
-        );
-      }
-    );
+    // error
   }
 
-  _imageFromGallery() async {
-    var image = await picker.pickImage(source: ImageSource.gallery);
-    _viewModel.setProfilePicture(File(image?.path ?? ""));
+  Future<void> _imageFromGallery() async {
+    //var image = await picker.pickImage(source: ImageSource.gallery);
+    //_viewModel.setProfilePicture(File(image?.path ?? ""));
   }
 
-  _imageFromCamera() async {
-    var image = await picker.pickImage(source: ImageSource.camera);
-    _viewModel.setProfilePicture(File(image?.path ?? ""));
+  Future<void> _imageFromCamera() async {
+    //var image = await picker.pickImage(source: ImageSource.camera);
+    //_viewModel.setProfilePicture(File(image?.path ?? ""));
   }
 
   @override
