@@ -14,6 +14,7 @@ class AppStrings{
   static const String register = "Sign up";
   static const String mobileNumber = "Mobile Number";
   static const String retryAgain = "Retry Again";
+  static const String profilePicture = "Profile Picture";
   static const String ok = "Ok";
   static const String success = "Success";
   static const String linkSend = "Link send to your email";
