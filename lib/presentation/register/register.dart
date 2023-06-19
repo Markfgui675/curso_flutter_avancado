@@ -2,6 +2,9 @@ import 'package:curso_flutter_avancado/presentation/register/register_viewmodel.
 import 'package:flutter/material.dart';
 
 import '../../app/di.dart';
+import '../common/state_renderer/state_render_impl.dart';
+import '../resources/color_manager.dart';
+import '../resources/values_manager.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -45,6 +48,27 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        elevation: AppSize.s0,
+        iconTheme: IconThemeData(color: ColorManager.primary),
+        backgroundColor: ColorManager.white,
+      ),
+      body: StreamBuilder<FlowState>(
+        stream: _viewModel.outputState,
+        builder: (context, snapshot){
+          return Center(
+            child: snapshot.data?.getScreenWidget(context, _getContentWidget(), (){
+              _viewModel.register();
+            }) ?? _getContentWidget(),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _getContentWidget(){
     return Container();
   }
 
