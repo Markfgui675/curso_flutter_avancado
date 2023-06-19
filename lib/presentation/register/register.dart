@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../app/di.dart';
 import '../common/state_renderer/state_render_impl.dart';
+import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
+import '../resources/strings_manager.dart';
 import '../resources/values_manager.dart';
 
 class RegisterView extends StatefulWidget {
@@ -69,7 +71,118 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _getContentWidget(){
-    return Container();
+    return Container(
+      padding: EdgeInsets.only(top: AppPadding.p100),
+      color: ColorManager.white,
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image(image: AssetImage(ImageAssets.splashLogo), width: AppSize.s100,),
+              SizedBox(height: AppSize.s28,),
+              Padding(
+                padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorUserName,
+                  builder: (context, snapshot){
+                    return TextFormField(
+                      controller: _userTextEditingController,
+                      keyboardType: TextInputType.emailAddress,
+                      cursorColor: ColorManager.primary,
+                      decoration: InputDecoration(
+                          hintText: AppStrings.userName,
+                          labelText: AppStrings.userName,
+                          errorText: snapshot.data
+
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: AppSize.s28,),
+              Padding(
+                padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorPassword,
+                  builder: (context, snapshot){
+                    return TextFormField(
+                      controller: _passwordTextEditingController,
+                      keyboardType: TextInputType.text,
+                      cursorColor: ColorManager.primary,
+                      decoration: InputDecoration(
+                          hintText: AppStrings.password,
+                          labelText: AppStrings.password,
+                          errorText: snapshot.data
+
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: AppSize.s28,),
+              Padding(
+                padding: EdgeInsets.only(left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<bool>(
+                  stream: _viewModel.outputIsAllInputsValid,
+                  builder: (context, snapshot){
+                    return SizedBox(
+                      width: double.infinity,
+                      height: AppSize.s40,
+                      child: ElevatedButton(
+                          onPressed: (snapshot.data ?? false)
+                              ? () {
+                            _viewModel.register();
+                          }
+                              : null,
+                          child: Text(
+                              AppStrings.login
+                          )
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(
+                    top: AppPadding.p12,
+                    left: AppPadding.p28,
+                    right: AppPadding.p28
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, Routes.forgotPasswordRoute);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                        child: Text(AppStrings.forgotPassword, textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.subtitle2,),
+                      ),
+                    ),
+
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, Routes.registerRoute);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                        child: Text(AppStrings.register, textAlign: TextAlign.end,
+                          style: Theme.of(context).textTheme.subtitle2,),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
