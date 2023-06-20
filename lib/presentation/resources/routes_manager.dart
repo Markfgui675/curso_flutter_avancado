@@ -26,6 +26,8 @@ class RouteGenerator{
 
   static Route<dynamic> getRoute(RouteSettings routeSettings){
 
+    bool alreadyInstance = false;
+
     switch(routeSettings.name){
 
       case Routes.splashRoute:
@@ -36,14 +38,14 @@ class RouteGenerator{
 
       case Routes.loginRoute:
         initLoginModule();
+        initRegisterModule();
+        initForgotPasswordModule();
         return MaterialPageRoute(builder: (_) => LoginView());
 
       case Routes.registerRoute:
-        initRegisterModule();
         return MaterialPageRoute(builder: (_) => RegisterView());
 
       case Routes.forgotPasswordRoute:
-        initForgotPasswordModule();
         return MaterialPageRoute(builder: (_) => ForgotPasswordView());
 
       case Routes.mainRoute:

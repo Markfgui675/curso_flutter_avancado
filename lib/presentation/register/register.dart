@@ -218,7 +218,7 @@ class _RegisterViewState extends State<RegisterView> {
                           }
                               : null,
                           child: Text(
-                              AppStrings.login
+                              AppStrings.register
                           )
                       ),
                     );
@@ -232,31 +232,15 @@ class _RegisterViewState extends State<RegisterView> {
                     left: AppPadding.p28,
                     right: AppPadding.p28
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, Routes.forgotPasswordRoute);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
-                        child: Text(AppStrings.forgotPassword, textAlign: TextAlign.start,
-                          style: Theme.of(context).textTheme.subtitle2,),
-                      ),
-                    ),
-
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, Routes.registerRoute);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
-                        child: Text(AppStrings.register, textAlign: TextAlign.end,
-                          style: Theme.of(context).textTheme.subtitle2,),
-                      ),
-                    ),
-                  ],
+                child: InkWell(
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: AppPadding.p20, bottom: AppPadding.p8),
+                    child: Text(AppStrings.haveAnAccount, textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.subtitle2,),
+                  ),
                 ),
               )
 
