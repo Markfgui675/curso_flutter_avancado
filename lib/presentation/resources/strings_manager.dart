@@ -33,4 +33,9 @@ class AppStrings{
 
   static const String loading = "Loading...";
 
+  static const String home = "Home";
+  static const String notifications = "Notifications";
+  static const String search = "Search";
+  static const String settings = "Settings";
+
 }
