@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:curso_flutter_avancado/presentation/register/register_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import '../../app/app_preferences.dart';
 import '../../app/di.dart';
 import '../../data/mapper/mapper.dart';
 import '../common/state_renderer/state_render_impl.dart';
@@ -21,6 +23,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
 
   RegisterViewModel _viewModel = instance<RegisterViewModel>();
+  AppPreferences _appPreferences = instance<AppPreferences>();
   //ImagePicker picker = instance<ImagePicker>();
   final _formKey = GlobalKey<FormState>();
 
@@ -42,6 +45,13 @@ class _RegisterViewState extends State<RegisterView> {
     });
     _passwordTextEditingController.addListener(() {
       _viewModel.setPassword(_passwordTextEditingController.text);
+    });
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream.listen((isSuccessLoggedIn){
+      // navigate to mais screen
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _appPreferences.setUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
     });
   }
 
@@ -116,13 +126,10 @@ class _RegisterViewState extends State<RegisterView> {
                             // update view model with the selected code
                             _viewModel.setCountryCode(country.dialCode ?? EMPTY);
                           },
-                          initialSelection: "+33",
+                          initialSelection: "+55",
                           showCountryOnly: true,
                           showOnlyCountryWhenClosed: true,
-
-                          favorite: [
-                            "+966","+02","+39"
-                          ],
+                          hideMainText: true,
                         )
                       ),
                       Expanded(
@@ -213,10 +220,10 @@ class _RegisterViewState extends State<RegisterView> {
                       height: AppSize.s40,
                       child: ElevatedButton(
                           onPressed: (snapshot.data ?? false)
-                              ? () {
+                              ? null
+                              : () {
                             _viewModel.register();
-                          }
-                              : null,
+                          },
                           child: Text(
                               AppStrings.register
                           )

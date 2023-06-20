@@ -15,6 +15,7 @@ RegisterViewModelOutput{
   StreamController _passwordStreamController = StreamController<String>.broadcast();
   StreamController _profilePictureStreamController = StreamController<File>.broadcast();
   StreamController _isAllInputsValidStreamController = StreamController<String>.broadcast();
+  StreamController isUserLoggedInSuccessfullyStreamController = StreamController<bool>();
 
   RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase);
@@ -46,7 +47,7 @@ RegisterViewModelOutput{
 
     if(_errorTimes > 1){
       // navigate to main screen after the login --forced
-      //isUserLoggedInSuccessfullyStreamController.add(true);
+      isUserLoggedInSuccessfullyStreamController.add(true);
     } else {
       inputState.add(ErrorState(failure.message, StateRendererType.POPUP_ERROR_STATE));
     }
@@ -70,6 +71,7 @@ RegisterViewModelOutput{
     _passwordStreamController.close();
     _profilePictureStreamController.close();
     _isAllInputsValidStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
     super.dispose();
   }
 
@@ -165,6 +167,7 @@ RegisterViewModelOutput{
 
   @override
   setEmail(String email) {
+    inputEmail.add(email);
     if(_isEmailValid(email)){
       // update email view object with username value
       registerViewObject = registerViewObject.copyWith(email: email);
@@ -177,6 +180,7 @@ RegisterViewModelOutput{
 
   @override
   setMobileNumber(String mobileNumber) {
+    inputMobileNumber.add(mobileNumber);
     if(_isMobileNumberValid(mobileNumber)){
       // update userName view object with username value
       registerViewObject = registerViewObject.copyWith(mobileNumber: mobileNumber);
@@ -189,6 +193,7 @@ RegisterViewModelOutput{
 
   @override
   setPassword(String password) {
+    inputPassword.add(password);
     if(_isPasswordValid(password)){
       // update password view object with username value
       registerViewObject = registerViewObject.copyWith(password: password);
@@ -201,6 +206,7 @@ RegisterViewModelOutput{
 
   @override
   setProfilePicture(File profilePicture) {
+    inputProfilePicture.add(profilePicture);
     if(profilePicture.path.isNotEmpty){
       // update register view object with username value
       registerViewObject = registerViewObject.copyWith(profilePicture: profilePicture.path);
@@ -213,6 +219,7 @@ RegisterViewModelOutput{
 
   @override
   setUserName(String userName) {
+    inputUserName.add(userName);
     if(_isUserNameValid(userName)){
       // update register view object with username value
       registerViewObject = registerViewObject.copyWith(userName: userName);
