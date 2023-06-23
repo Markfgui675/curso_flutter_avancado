@@ -25,6 +25,7 @@ dependencies:
   get_it:
   lottie:
   country_code_picker:
+  rxdart:
 
 dev_dependencies:
   flutter_test:

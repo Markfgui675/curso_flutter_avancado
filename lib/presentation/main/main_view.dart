@@ -1,4 +1,4 @@
-import 'package:curso_flutter_avancado/presentation/main/home_page.dart';
+import 'package:curso_flutter_avancado/presentation/main/home/home_page.dart';
 import 'package:curso_flutter_avancado/presentation/main/search_page.dart';
 import 'package:curso_flutter_avancado/presentation/main/settings_page.dart';
 import 'package:curso_flutter_avancado/presentation/resources/strings_manager.dart';
