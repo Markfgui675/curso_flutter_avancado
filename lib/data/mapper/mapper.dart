@@ -49,3 +49,21 @@ extension BannerResponseMapper on BannersResponse?{
         this?.title?.orEmpty() ?? EMPTY, this?.image?.orEmpty() ?? EMPTY, this?.link?.orEmpty() ?? EMPTY);
   }
 }
+
+extension HomeResponseMapper on HomeResponse?{
+  HomeObject toDomain(){
+
+    List<Service> mappedServices = (this!.data!.services!.map((service) => service.toDomain()) ??
+        Iterable.empty().cast<Service>()).toList();
+
+    List<Store> mappedStores = (this!.data!.stores!.map((store) => store.toDomain()) ??
+        Iterable.empty().cast<Store>()).toList();
+
+    List<Banner> mappedBanner = (this!.data!.banners!.map((banners) => banners.toDomain()) ??
+        Iterable.empty().cast<Banner>()).toList();
+
+    var data = HomeData(mappedServices, mappedStores, mappedBanner);
+
+    return HomeObject(data);
+  }
+}
