@@ -30,4 +30,7 @@ abstract class AppServiceClient{
       @Field("country_mobile_code") String countryMobileCode,
   );
 
+  @GET("/home")
+  Future<HomeResponse> getHome();
+
 }
