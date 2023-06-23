@@ -30,3 +30,22 @@ extension ForgotPasswordResponseMapper on ForgotPasswordResponse?{
     return this?.support?.orEmpty() ?? EMPTY;
   }
 }
+
+extension ServiceResponseMapper on ServiceResponse?{
+  Service toDomain(){
+    return Service(this?.id?.orEmpty() ?? ZERO, this?.title?.orEmpty() ?? EMPTY, this?.image?.orEmpty() ?? EMPTY);
+  }
+}
+
+extension StoreResponseMapper on StoreResponse?{
+  Store toDomain(){
+    return Store(this?.id?.orEmpty() ?? ZERO, this?.title?.orEmpty() ?? EMPTY, this?.image?.orEmpty() ?? EMPTY);
+  }
+}
+
+extension BannerResponseMapper on BannersResponse?{
+  Banner toDomain(){
+    return Banner(this?.id?.orEmpty() ?? ZERO,
+        this?.title?.orEmpty() ?? EMPTY, this?.image?.orEmpty() ?? EMPTY, this?.link?.orEmpty() ?? EMPTY);
+  }
+}
