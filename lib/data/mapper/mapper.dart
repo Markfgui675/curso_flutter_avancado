@@ -44,8 +44,8 @@ extension StoreResponseMapper on StoreResponse?{
 }
 
 extension BannerResponseMapper on BannersResponse?{
-  Banner toDomain(){
-    return Banner(this?.id?.orEmpty() ?? ZERO,
+  Banners toDomain(){
+    return Banners(this?.id?.orEmpty() ?? ZERO,
         this?.title?.orEmpty() ?? EMPTY, this?.image?.orEmpty() ?? EMPTY, this?.link?.orEmpty() ?? EMPTY);
   }
 }
@@ -59,8 +59,8 @@ extension HomeResponseMapper on HomeResponse?{
     List<Store> mappedStores = (this!.data!.stores!.map((store) => store.toDomain()) ??
         Iterable.empty().cast<Store>()).toList();
 
-    List<Banner> mappedBanner = (this!.data!.banners!.map((banners) => banners.toDomain()) ??
-        Iterable.empty().cast<Banner>()).toList();
+    List<Banners> mappedBanner = (this!.data!.banners!.map((banners) => banners.toDomain()) ??
+        Iterable.empty().cast<Banners>()).toList();
 
     var data = HomeData(mappedServices, mappedStores, mappedBanner);
 

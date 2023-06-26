@@ -9,7 +9,7 @@ import '../../../domain/usecase/home_usecase.dart';
 
 class HomeViewModel extends BaseViewModel with HomeViewModelInput, HomeViewModelOutput{
 
-  StreamController _bannerStreamController = BehaviorSubject<List<Banner>>();
+  StreamController _bannerStreamController = BehaviorSubject<List<Banners>>();
   StreamController _servicesStreamController = BehaviorSubject<List<Service>>();
   StreamController _storeStreamController = BehaviorSubject<List<Store>>();
 
@@ -53,7 +53,7 @@ class HomeViewModel extends BaseViewModel with HomeViewModelInput, HomeViewModel
   Sink get inputStores => _storeStreamController.sink;
 
   @override
-  Stream<List<Banner>> get outputBanners => _bannerStreamController.stream.map((banners) => banners);
+  Stream<List<Banners>> get outputBanners => _bannerStreamController.stream.map((banners) => banners);
 
   @override
   Stream<List<Service>> get outputServices => _servicesStreamController.stream.map((services) => services);
@@ -72,5 +72,5 @@ abstract class HomeViewModelInput{
 abstract class HomeViewModelOutput{
   Stream<List<Store>> get outputStores;
   Stream<List<Service>> get outputServices;
-  Stream<List<Banner>> get outputBanners;
+  Stream<List<Banners>> get outputBanners;
 }

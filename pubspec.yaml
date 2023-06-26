@@ -26,6 +26,7 @@ dependencies:
   lottie:
   country_code_picker:
   rxdart:
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:
