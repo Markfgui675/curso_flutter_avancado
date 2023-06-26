@@ -6,6 +6,7 @@ import '../../../app/di.dart';
 import '../../../domain/model/model.dart';
 import '../../common/state_renderer/state_render_impl.dart';
 import '../../resources/color_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../../resources/strings_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -149,7 +150,49 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getStores(){
-    return Center();
+    return StreamBuilder<List<Store>>(
+      stream: _viewModel.outputStores,
+      builder: (context, snapshot){
+        return _getStoresContent(snapshot.data);
+      },
+    );
+  }
+
+  Widget _getStoresContent(List<Store>? stores){
+    if(stores!=null){
+      return Padding(
+        padding: EdgeInsets.only(left: AppPadding.p12, right: AppPadding.p12, top: AppPadding.p12),
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            GridView.count(
+              crossAxisSpacing: AppSize.s8,
+              mainAxisSpacing: AppSize.s8,
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              children: List.generate(
+                  stores.length,
+                  (index){
+                    return InkWell(
+                      onTap: (){
+                        //navigate do details screen
+                        Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
+                      },
+                      child: Card(
+                        elevation: AppSize.s4,
+                        child: Container(color: Colors.blueAccent,),
+                      ),
+                    );
+                  }
+              ),
+            )
+          ],
+        ),
+      );
+    }else{
+      return Container();
+    }
   }
 
 
