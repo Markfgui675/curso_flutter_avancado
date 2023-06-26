@@ -106,7 +106,46 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getServices(){
-    return Center();
+    return StreamBuilder<List<Service>>(
+      stream: _viewModel.outputServices,
+      builder: (context, snapshot){
+        return _getServicesContent(snapshot.data);
+      },
+    );
+  }
+
+  Widget _getServicesContent(List<Service>? services){
+    if(services!=null){
+      return Padding(
+        padding: EdgeInsets.only(left: AppPadding.p12, right: AppPadding.p12),
+        child: Container(
+          height: AppSize.s140,
+          margin: EdgeInsets.symmetric(vertical: AppMargin.m12),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children:
+              services.map((service) => Card(
+                elevation: AppSize.s4,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSize.s12),
+                    side: BorderSide(color: ColorManager.white, width: AppSize.s1_5)
+                ),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(AppSize.s12),
+                      child: Container(color: Colors.black26,),
+                    )
+                  ],
+                ),
+              )).toList()
+            ,
+          ),
+        ),
+      );
+    }else{
+      return Container();
+    }
   }
 
   Widget _getStores(){
