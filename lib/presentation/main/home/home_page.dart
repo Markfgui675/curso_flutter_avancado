@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-        child: StreamBuilder<FlowState>(
+        /*
+        StreamBuilder<FlowState>(
           stream: _viewModel.outputState,
           builder: (context, snapshot){
             return snapshot.data!.getScreenWidget(
@@ -43,7 +44,9 @@ class _HomePageState extends State<HomePage> {
                 }
             ) ?? Container();
           },
-        ),
+        )
+         */
+        child: _getContentWidget(),
       ),
     );
   }
